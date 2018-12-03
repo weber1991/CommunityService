@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+      {% include 'Reception/_head.html' %}
+      {% block css %}
+      {% endblock %}
+    <style>
+      .weui-footer {
+        margin: 25px 0 10px 0;
+      }
+    </style>
+  </head>
+
+  <body ontouchstart>
+ <div class="weui-tab">
+  <!-- 这个用来填充效果 -->
+  <header class='demos-header'>{% block header_title %} {% endblock %}</header>
+
+  {% block content %}
+  {% endblock %}
+
+
+  <div class="weui-footer">
+{#      <p class="weui-footer__links">#}
+{#        <a href="http://jqweui.com" class="weui-footer__link">jQuery-WeUI 首页</a>#}
+{#      </p>#}
+ <p class="weui-footer__text" style="color: #f0f0f0">Design by ****</p>
+ </div>
+
+
+    <div class="weui-navbar">
+  <div class="weui-navbar__item">
+    <a href="{% url 'Reception:contactus' %}">联系我们</a>
+  </div>
+  <div class="weui-navbar__item weui_bar__item_on">
+      <a href="{% url 'Reception:index' %}">首&nbsp;&nbsp;&nbsp;&nbsp;页</a>
+  </div>
+  <div class="weui-navbar__item">
+    <a href="{% url 'Reception:myindex' %}">个人中心</a>
+  </div>
+  </div>
+  {% block footer %}
+  {% endblock %}
+  </div>
+ <script src="{% static 'Reception/js/mui.min.js' %}"></script>
+  <script src="{% static 'Reception/js/jquery-2.1.4.js' %}"></script>
+  <script src="{% static 'Reception/js/fastclick.js' %}"></script>
+  <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+  </script>
+  <script src="{% static 'Reception/js/jquery-weui.js' %}"></script>
+  {% block js %}
+  {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{% load static %}
+  <div class="weui-tabbar">
+    <a href="{% url 'Reception:backpassword' %}" class="weui-tabbar__item weui-bar__item--on">
+{#      <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">1</span>#}
+      <div class="weui-tabbar__icon">
+        <img src="{% static 'Reception/images/b-backpassword.png' %}" alt="">
+      </div>
+      <p class="weui-tabbar__label">重置密码</p>
+    </a>
+    <a href="{% url 'Reception:login' %}" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="{% static 'Reception/images/b-login.png' %}" alt="">
+      </div>
+      <p class="weui-tabbar__label">登陆</p>
+    </a>
+    <a href="{% url 'Reception:register' %}" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="{% static 'Reception/images/b-regist.png' %}" alt="">
+      </div>
+      <p class="weui-tabbar__label">注册</p>
+    </a>
+  </div>

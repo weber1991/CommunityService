@@ -1,0 +1,47 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block js %}
+{% endblock %}
+
+{% block title %}
+    办理事项
+{% endblock %}
+
+
+{% block content %}
+    <h2 style="text-align: center;">办理{{ shixiang.name }}</h2>
+    <form action="{% url 'Reception:setshixiang' shixiang.bh %}" method="POST">{% csrf_token %}
+    <div data-role="fieldcontain">
+		<label for="name">办理人:</label>
+        <input type="text" name="met_name" id="sendname" readonly="readonly" value="{{ wechatuser.name }}"  />
+	</div>
+    <div data-role="fieldcontain">
+		<label for="name">联系方式:</label>
+        <input type="text" name="met_phone" id="sendphone" readonly="readonly" value="{{ wechatuser.phone }}"  />
+	</div>
+    <div data-role="fieldcontain">
+        <label for="textarea">提交资料(如无上传按钮,请刷新页面.):</label>
+
+    </div>
+    <div id="article-body" name="met_sendcontent" style="border: 1px solid gainsboro; z-index: 100;" ></div>
+
+
+    <div style="width: 100%;z-index: -1;margin-top:50%;"><button  type="submit" data-theme="a">提交</button></div>
+    </form>
+<script>
+/*实例化一个编辑器*/
+var artEditor = new Eleditor({
+						el: '#article-body',
+						upload:{
+							server: '/Eleditor_uploads/Reception',
+							fileSizeLimit: 2,
+                            formName:'imgFile',
+						}
+					});
+</script>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

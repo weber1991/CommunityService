@@ -1,0 +1,25 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+
+{% block title %}
+    查看留言
+{% endblock %}
+
+{% block content %}
+    <div class="weui-media-box weui-media-box_text">
+    {% for message in messagelist %}
+        {% if message.process == '已回复' %}
+            <h4 class="weui-media-box__title"><a href="{% url 'Reception:getmessage' message.id %}">{{ message.sendtitle }}&nbsp;({{ message.process }})</a></h4>
+        {% else %}
+            <h4 class="weui-media-box__title">{{ message.sendtitle }}&nbsp;(待回复)</h4>
+        {% endif %}
+            <ul class="weui-media-box__info">
+              <li class="weui-media-box__info__meta">留言时间:{{ message.sendtime }}</li>
+            </ul>
+    {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_myfoot.html' %}
+{% endblock %}

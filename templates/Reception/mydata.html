@@ -1,0 +1,36 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    登陆系统
+{% endblock %}
+
+
+{% block content %}
+    <form action="{% url 'Reception:mydata' %}" method="POST">{% csrf_token %}
+    <div data-role="fieldcontain">
+		<label for="name">姓名:</label>
+        <input type="text" name="met_name"  readonly="readonly" id="met_name" value="{{ wechatuser.name }}"  />
+	</div>
+
+    <div data-role="fieldcontain">
+		<label for="name">身份证:</label>
+        <input type="text" name="met_idcard"  readonly="readonly" id="met_idcard" value="{{ wechatuser.idcard }}"  />
+	</div>
+
+
+    <div data-role="fieldcontain">
+		<label for="name">联系方式:</label>
+        <input type="text" name="met_phone" maxlength="11" id="met_idcard" size="11" value="{{ wechatuser.phone }}"  />
+	</div>
+
+    <div class="ui-body ui-body-b">
+        <div class="ui-block-b" style="width: 100%;"><button  type="submit" data-theme="a">修改联系方式</button></div>
+    </div>
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

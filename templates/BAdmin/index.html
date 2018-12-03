@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网站管理后台</title>
+<link href="{% static 'BAdmin/images/metinfo.css' %}" rel="stylesheet" />
+</head>
+<script type="text/javascript" src="{% static 'BAdmin/images/jQuery1.7.2.js' %}"></script>
+<script type="text/javascript" src="{% static 'BAdmin/images/cookie.js' %}"></script>
+<script type="text/javascript">
+
+function kzqie(my){
+	if(my.text()=='宽版'){
+		$('#metcmsbox').css('width','100%');
+		$.ajax({url : 'include/config.php?lang=cn&met_kzqie=1',type: "POST"});
+		my.attr('title','切换到窄版');
+		my.text('窄版');
+	}else{
+		$('#metcmsbox').css('width','1000px');
+		$.ajax({url : 'include/config.php?lang=cn&met_kzqie=0',type: "POST"});
+		my.attr('title','宽版');
+		my.text('宽版');
+	}
+}
+</script>
+
+<body id="indexid">
+<div id="metcmsbox">
+<div id="top"> 
+    <div class="floatr">
+	  <div class="top-r-box">
+		<div class="top-right-boxr">
+			<div class="top-r-t">
+				您好 <a href="#" id="mydata" title="编辑 admin 的个人资料" class='tui' style="text-decoration:underline;">{{ username }}</a><span>-</span><a target="_top" href="{% url 'BAdmin:blogout' %}" id="outhome" title="退出" class='tui'>退出</a><span>|</span><a href="javascript:;" onclick="kzqie($(this))" title="切换到窄版">窄版</a>
+			</div>
+	      <div class="langs">
+
+        <div class="langtxt">
+			<div class="langkkkbox">
+				<div id="langcig">
+					<span id="langcion" title="cn">简体中文</span>
+				  <span class="langqie">语言设置</span>
+				</div>
+				<div class="langlist shadow" style="display:none;"></div>
+			</div>
+			<div class="webyy">网站语言：</div>
+		</div>
+
+		  </div>
+		</div>
+		<div class="nav">
+          <ul id="topnav">
+          {% if user.issuper %}
+            <li id="metnav_1" class="list">
+					<a href="javascript:;" id="nav_1" class="onnav" hidefocus="true">
+					<span class="c1"></span>
+					基本信息
+					</a>
+			</li>
+          {% endif %}
+          {% if user.blog > 0 or user.issuper%}
+            <li id="metnav_2" class="list">
+					<a href="javascript:;" id="nav_2"  hidefocus="true">
+					<span class="c2"></span>
+					社区动态
+					</a>
+			</li>
+          {% endif %}
+          {% if user.webword > 0 or user.issuper %}
+
+            <li id="metnav_3" class="list">
+					<a href="javascript:;" id="nav_3"  hidefocus="true">
+					<span class="c3"></span>
+					网上办事
+					</a>
+			</li>
+          {% endif %}
+
+            {% if user.ticket > 0 or user.issuper %}
+            <li id="metnav_4" class="list">
+					<a href="javascript:;" id="nav_4"  hidefocus="true">
+					<span class="c4"></span>
+					取票管理
+					</a>
+			</li>
+            {% endif %}
+            {% if user.message > 0  or user.issuper %}
+            <li id="metnav_5" class="list">
+					<a href="javascript:;" id="nav_5"  hidefocus="true">
+					<span class="c5"></span>
+					书记信箱
+					</a>
+			</li>
+          {% endif %}
+              {% if user.person > 0  or user.issuper %}
+            <li id="metnav_6" class="list">
+					<a href="javascript:;" id="nav_6"  hidefocus="true">
+					<span class="c6"></span>
+					人员信息
+					</a>
+			</li>
+              {% endif %}
+
+{% if user.hold3 == '1' %}
+            <li id="metnav_7" class="list">
+					<a href="javascript:;" id="nav_7"  hidefocus="true">
+					<span class="c7"></span>
+					保留
+					</a>
+			</li>
+{% endif %}
+          </ul>
+		</div>
+	  </div>
+    </div>
+    <div class="floatl">
+	    <a href="#" hidefocus="true" id="met_logo"><img src="{% static 'BAdmin/images/logoen.png' %}" alt="企业网站管理系统" title="企业网站管理系统" /></a>
+	</div>
+</div>
+<div id="content">
+    <div class="floatl" id="metleft">
+        <div class="fast">
+	        <a  href="{% url 'Reception:communityshow' %}" title="网站首页">网站首页</a>
+			<span></span>
+			<a href="{% url 'BAdmin:index' %}" id="hthome" title="后台首页">后台首页</a>
+		</div>
+	    <div class="nav_list" id="leftnav">
+{% if user.issuper %}
+<ul  id="ul_1">
+<li ><a href="{% url 'BAdmin:comnunity_beditor' %}" target='main' id='nav_1_8' class="on" title="社区简介" hidefocus="true">社区简介</a></li>
+<li ><a href="{% url 'BAdmin:contactus_beditor' %}" target='main' id='nav_1_9' title="联系我们" hidefocus="true">联系我们</a></li>
+{#<li ><a href="{% url 'BAdmin:becomevolunteer_editor' %}" target='main' id='nav_1_10' title="志愿者" hidefocus="true">志愿者</a></li>#}
+</ul>
+{% endif %}
+
+<ul style="display:none;" id="ul_2">
+    {% if user.issuper or user.blog > 1%}
+<li ><a href="{% url 'BAdmin:blog_add' %}" target='main' id='nav_2_18' title="新增资讯" hidefocus="true">新增资讯</a></li>
+ {% endif %}
+    <li ><a href="{% url 'BAdmin:blog_list' %}" target='main' id='nav_2_19' title="查询资讯" hidefocus="true">查询资讯</a></li>
+</ul>
+
+<ul style="display:none;" id="ul_3">
+{% if user.issuper or user.webword > 1 %}
+    <li ><a href="{% url 'BAdmin:shixiang_type' %}" target='main' id='nav_3_25' title="添加类型" hidefocus="true">添加类型</a></li>
+    <li ><a href="{% url 'BAdmin:shixiang_add' %}" target='main' id='nav_3_26' title="新增指南" hidefocus="true">新增指南</a></li>
+{% endif %}
+    <li ><a href="{% url 'BAdmin:shixiang_list' %}" target='main' id='nav_3_27' title="查看指南" hidefocus="true">查询指南</a></li>
+    {% if user.issuper or user.webword > 1 %}
+            <li ><a href="{% url 'BAdmin:toshixiang_setlist' %}" target='main' id='nav_3_28' title="待分派情况" hidefocus="true">待分派情况</a></li>
+    {% endif %}
+    <li ><a href="{% url 'BAdmin:toshixiang_list' %}" target='main' id='nav_3_301' title="我的受理情况" hidefocus="true">我的受理情况</a></li>
+    {% if user.issuper or user.webword > 1%}
+    <li ><a href="{% url 'BAdmin:toshixiang_list_all' %}" target='main' id='nav_3_302' title="所有受理情况" hidefocus="true">所有受理情况</a></li>
+    {% endif %}
+</ul>
+
+<ul style="display:none;" id="ul_4">
+{% if user.issuper or user.ticket > 1%}
+<li ><a href="{% url 'BAdmin:random_list' %}" target='main' id='nav_4_29' title="随机码" hidefocus="true">随机码</a></li>
+{% endif %}
+{#<li ><a href="{% url 'BAdmin:ticket_appoint' %}" target='main' id='nav_4_30' title="预约情况" hidefocus="true">预约情况</a></li>#}
+<li ><a href="{% url 'BAdmin:ticket_list' %}" target='main' id='nav_4_30' title="取票情况" hidefocus="true">今天取票情况</a></li>
+
+{% if user.issuper or user.ticket > 1%}
+<li ><a href="{% url 'BAdmin:ticket_list_all' %}" target='main' id='nav_4_31' title="票号历史" hidefocus="true">票号历史</a></li>
+<li ><a href="{% url 'BAdmin:service_add' %}" target='main' id='nav_4_50' title="业务新增" hidefocus="true">业务新增</a></li>
+<li ><a href="{% url 'BAdmin:service_list' %}" target='main' id='nav_4_32' title="业务配置" hidefocus="true">业务配置</a></li>
+<li ><a href="{% url 'BAdmin:window_list' %}" target='main' id='nav_4_34' title="窗口列表" hidefocus="true">窗口列表</a></li>
+{% endif %}
+    <li ><a href="{% url 'BAdmin:window_2_user' %}" target='main' id='nav_4_33' title="窗口配置" hidefocus="true">窗口配置</a></li>
+
+</ul>
+
+<ul style="display:none;" id="ul_5">
+    {% if user.message > 1 or user.issuper %}
+<li ><a href="{% url 'BAdmin:message_set_list' %}" target='main' id='nav_5_32' title="查看留言" hidefocus="true">分派留言</a></li>
+    {% endif %}
+    <li ><a href="{% url 'BAdmin:message_list' %}" target='main' id='nav_5_34' title="查看留言" hidefocus="true">留言办理</a></li>
+    {% if user.message > 1 or user.issuper %}
+        <li ><a href="{% url 'BAdmin:message_check_list' %}" target='main' id='nav_5_33' title="所需审阅留言" hidefocus="true">所需审阅留言</a></li>
+    <li ><a href="{% url 'BAdmin:message_all_list' %}" target='main' id='nav_5_35' title="查看所有留言" hidefocus="true">查看所有留言</a></li>
+    {% endif %}
+{#    微信版专用功能#}
+    {#<li ><a href="1.html" target='main' id='nav_5_34' title="信息群发" hidefocus="true">信息群发</a></li>#}
+
+</ul>
+
+<ul style="display:none;" id="ul_6">
+<li ><a href="{% url 'BAdmin:user_data' user.id %}" target='main' id='nav_6_44' title="个人中心" hidefocus="true">个人中心</a></li>
+{% if user.issuper %}
+    <li ><a href="{% url 'BAdmin:user_list' %}" target='main' id='nav_6_41' title="系统用户" hidefocus="true">系统用户</a></li>
+{% endif %}
+    {% if user.issuper or user.ticket > 1%}
+    <li ><a href="{% url 'BAdmin:wechatuser_list' %}" target='main' id='nav_6_40' title="微信用户" hidefocus="true">微信用户</a></li>
+{% endif %}
+</ul>
+
+<ul style="display:none;" id="ul_7">
+<li ><a href="javascript:;" target='main' id='nav_7_45' title="保留" hidefocus="true">保留</a></li>
+<li ><a href="javascript:;" target='main' id='nav_7_49' title="保留" hidefocus="true">保留</a></li>
+</ul>
+</div>
+        
+<div class="claer"></div>
+<div class="left_footer">感谢使用 <a href="#" target="_blank"><!--By **** --></a><span class="none">Powered by <b><a href='#' target=_blank></a></b> &copy;2008-2013 &nbsp;<a href='' target=_blank></a></span></div>
+
+	</div>
+    <div class="floatr" id="metright">
+      <div class="iframe">
+	    <div class="min"><iframe frameborder="0" id="main" name="main" src="javascript:;" scrolling="no"></iframe></div>
+		</div>
+    </div>
+	<div class="clear"></div>
+	</div>
+</div>
+<script src="{% static 'BAdmin/images/metinfo.js' %}" type="text/javascript"></script>
+
+</body>
+</html>

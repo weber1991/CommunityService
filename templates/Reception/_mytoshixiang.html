@@ -1,0 +1,137 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block title %}
+    办理事项
+{% endblock %}
+
+{% block content %}
+    <form id="form_setshixiang" action="{% url 'Reception:mytoshixiang' toshixiang.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">办理人：</label></div>
+    <div class="weui-cell__bd">
+        <input name="met_name" class="weui-input" type="text" readonly="readonly" value="{{ toshixiang.wechatuser.name }}" >
+    </div>
+  </div>
+
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">联系方式：</label></div>
+    <div class="weui-cell__bd">
+        <input name="met_phone" class="weui-input" type="text" readonly="readonly" value="{{ toshixiang.wechatuser.phone }}" >
+    </div>
+  </div>
+
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">办理事项：</label></div>
+    <div class="weui-cell__bd">
+
+        <input name="met_shixiangname" class="weui-input" type="text" readonly="readonly" value="{{ toshixiang.shixiang.name }}" >
+    </div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">申请说明：</label></div>
+    <div class="weui-cell__bd">
+        {{ toshixiang.senddata|safe }}
+    </div>
+  </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">申请时间：</label></div>
+    <div class="weui-cell__bd">
+        <input name="met_addtime" class="weui-input" type="text" readonly="readonly" value="{{ toshixiang.addtime }}" >
+    </div>
+  </div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-media-box weui-media-box_text">
+                    <h2 class="weui-media-box__title">所上传材料</h2>
+                {% for file in file_list %}
+{#                    <p class="weui-media-box__desc">#}
+{#                        <input name="filename" class="weui-input" type="text" readonly="readonly" value="上传{{ file.name }}" >#}
+{#                    </p>#}
+{#                        <p class="weui-media-box__desc"><input name="file"  type="file" accept="image/*" />#}
+{#                        </p>#}
+                    <p class="weui-media-box__desc">
+                    <a href="{{ file.url }}" style="font-size: 20px">{{ file.name }}&nbsp;</a>
+                    </p>
+                {% endfor %}
+            </div>
+            </div>
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">处理结果：</label></div>
+    <div class="weui-cell__bd">
+        <input name="met_phone" class="weui-input" type="text" readonly="readonly" value="{{ toshixiang.state }}" >
+    </div>
+  </div>
+
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">结果说明：</label></div>
+    <div class="weui-cell__bd">
+        {{ toshixiang.backcontent|safe }}
+    </div>
+        </div>
+
+
+        </div>
+    {% if toshixiang.state == '退回' %}
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-media-box weui-media-box_text">
+                    <h2 class="weui-media-box__title">重新添加材料</h2>
+                {% for file in switch_file_list %}
+                    <p class="weui-media-box__desc">
+                        <input name="filename" class="weui-input" type="text" readonly="readonly" value="上传{{ file.name }}" >
+                    </p>
+                        <p class="weui-media-box__desc"><input name="file"  type="file" accept="image/*" />
+                        </p>
+                {% endfor %}
+            </div>
+            </div>
+    {% endif %}
+
+    {% if toshixiang.state == '通过' and toshixiang.rank !=  '待评价'  %}
+          <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">评价等级：</label></div>
+    <div class="weui-cell__bd">{{ toshixiang.rank }}
+    </div>
+  </div>
+          <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">评价内容：</label></div>
+    <div class="weui-cell__bd">{{ toshixiang.comment }}
+    </div>
+  </div>
+    {% endif %}
+    <div class="weui-btn-area">
+        {% if toshixiang.state == '退回' %}
+      <a  style="margin-top:10%;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="tosubmit()">重新提交</a>
+        {% endif %}
+            {% if toshixiang.state == '通过' and toshixiang.rank == '待评价' %}
+      <a  style="margin-top:10%;" class="weui-btn weui-btn_primary" href="{% url 'Reception:mytoshixiang_assess' toshixiang.id %}" id="showTooltips" >我要评价</a>
+        {% endif %}
+
+    </div>
+</form>
+
+
+{% endblock %}
+{% block js %}
+<script>
+        function tosubmit() {
+            {#var _content = artEditor.getContent();#}
+            {#var sendcontent = document.getElementById('met_sendcontent');#}
+            {#sendcontent.innerHTML = _content;#}
+            document.getElementById('form_setshixiang').submit();
+        }
+/*实例化一个编辑器*/
+{#var artEditor = new Eleditor({#}
+{#						el: '#article-body',#}
+{#						upload:{#}
+{#							server: '/Eleditor_uploads/Reception',#}
+{#							fileSizeLimit: 2,#}
+{#                            formName:'imgFile',#}
+{#						}#}
+{#					});#}
+</script>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
+

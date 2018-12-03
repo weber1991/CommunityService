@@ -1,0 +1,74 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<style>
+th {
+    border-bottom: 1px solid #d6d6d6;
+}
+
+tr:nth-child(even) {
+    background: #e9e9e9;
+}
+</style>
+{% endblock %}
+
+{% block title %}
+    我的票号情况
+{% endblock %}
+
+{% block content %}
+    <h1>我的票号情况</h1>
+    <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="myTable" data-column-btn-text="选择栏目">
+      <thead>
+        <tr>
+          <th data-priority="6">序号</th>
+          <th data-priority="1">取号</th>
+          <th data-priority="1">票号</th>
+          <th data-priority="1">状态</th>
+          <th data-priority="2">业务名称</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for ticket in myticketlist %}
+          <tr>
+            <td>{{ ticket.id }}</td>
+
+          {% if ticket.state == 4 %}
+          <td>待审核</td>
+          {% else %}
+          <td>{{ ticket.starttime }}</td>
+          {% endif %}
+
+          <td>{{ ticket.no }}</td>
+          {% if ticket.state == 4 %}
+            <td>预约号-待审核</td>
+          {% endif %}
+          {% if ticket.state == 3 %}
+            <td>已作废</td>
+          {% endif %}
+          {% if ticket.state == 2 %}
+            <td>办结</td>
+          {% endif %}
+          {% if ticket.state == 1 %}
+            <td>办理中</td>
+          {% endif %}
+          {% if ticket.state == 0 %}
+            <td>等候</td>
+          {% endif %}
+
+          <td>{{ ticket.service.name }}</td>
+      {% endfor %}
+
+      </tbody>
+    </table>
+{% endblock %}
+
+{% block footer %}
+<div data-role="navbar" >
+    <ul>
+        <li><a href="{% url 'Reception:random_check' %}" data-icon="minus">我要取号</a></li>
+        <li><a href="{% url 'Reception:ticket_appoint' %}" data-icon="grid">我要预约</a></li>
+    </ul>
+</div>
+{% endblock %}

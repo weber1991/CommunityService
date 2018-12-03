@@ -1,0 +1,25 @@
+
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    查看留言
+{% endblock %}
+
+{% block content %}
+    <ul data-role="listview" data-divider-theme="d" data-split-theme="d" data-filter="true" data-filter-placeholder="搜索"><!--data-inset="true" -->
+        {% for message in messagelist %}
+        <li>
+            <a href="{% url 'Reception:getmessage' message.id %}" style="background-color: white;">
+                <h2>{{ message.sendtitle }}</h2>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/myfooter.html' %}
+{% endblock %}

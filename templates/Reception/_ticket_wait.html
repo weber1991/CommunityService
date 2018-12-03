@@ -1,0 +1,33 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block content %}
+    <h1 style="text-align: center;color: #1aad19;">{{ today }}取号情况</h1>
+        <div class="weui-panel__bd">
+        {% for wait in waitlist %}
+          <div class="weui-media-box weui-media-box_text">
+            <h4 class="weui-media-box__title" style="font-size: 1.2rem;color: black;">{{ wait.window.name }}</h4>
+            <p class="weui-media-box__desc" style="font-size: .9rem;color: black;">等候人数&nbsp;:&nbsp;<b>{{ wait.count|default_if_none:'无' }}</b></p>
+            <p class="weui-media-box__desc" style="font-size: .9rem;color: black;">当前办理票号&nbsp;:&nbsp;<b>
+                {% for do in wait.doing %}
+                    {% if forloop.first %}
+                        {{ do.no }}
+                    {% else %}
+                        ,{{ do.no }}
+                    {% endif %}
+                {% endfor %}
+            </b></p>
+            <p class="weui-media-box__desc" style="font-size: .9rem;color: black;">下一个办理票号&nbsp;:&nbsp;<b>{{ wait.net|default_if_none:'无' }}</b></p>
+          </div>
+         {% endfor %}
+        </div>
+    <div class="weui-btn-area">
+      <a class="weui-btn weui-btn_primary" href="{% url 'Reception:random_check' %}" id="get_ticket" >我要取号</a>
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}
+

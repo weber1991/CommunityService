@@ -1,0 +1,67 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block css %}
+{% endblock %}
+{% block title %}
+    票号评价
+{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center;color: #0BB20C;">评价票号：{{ ticket }}</h2>
+    {% if ticket.state == 2 %}
+    <form id="form_assess" action="{% url 'Reception:bticket_assess' %}?ticketid={{ ticket.id }}" method="POST">{% csrf_token %}
+<div class="weui-cells weui-cells_form">
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">评价等级</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="assess_level">
+                        <option value="1">满意</option>
+                        <option value="2">一般</option>
+                        <option value="3">不满意</option>
+                    </select>
+                </div>
+            </div>
+        <div class="weui-cells__title">评价内容</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea name="assess_content" class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+    <div class="weui-btn-area">
+      <a  style="margin-top:50%;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="tosubmit()">提&nbsp;&nbsp;交</a>
+    </div>
+</div>
+</form>
+    {% else %}
+<h2 style="text-align: center;color: #0BB20C;">您好，业务还没办结，不能评论。</h2>
+        <div style="text-align: center;">
+        <img src="{% static 'Reception/images/cfsq2wm.jpg' %}">
+        </div>
+        <div style="text-align: center;color: #00a213;">
+            关注公众号，留意最新消息。
+        </div>
+    {% endif %}
+
+
+{% endblock %}
+{% block js %}
+<script>
+        function tosubmit() {
+            document.getElementById('form_assess').submit();
+        }
+</script>
+{% endblock %}
+
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}
+
+
+
+

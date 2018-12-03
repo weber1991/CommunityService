@@ -1,0 +1,24 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    办理详情
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+{% block content %}
+    <li>办理事项:&nbsp;{{ toshixiang.shixiang }}</li>
+    <li>申请时间:&nbsp;{{ toshixiang.addtime }}</li>
+    <li>申请资料:&nbsp;{{ toshixiang.senddata|safe }}</li>
+    <p> </p>
+    <li>反馈内容:&nbsp;{{ toshixiang.backcontent|safe }}</li>
+    <li>事项状态:&nbsp;{{ toshixiang.state }}</li>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

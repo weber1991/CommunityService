@@ -1,0 +1,170 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+{% block js %}
+    <script type="text/javascript">KindEditor.ready(function(K) {
+        K.create('textarea[name="met_content"]', {
+        width : "800px",
+        height : "500px",
+        uploadJson: '/admin/uploads/kindeditor',
+    });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+	<div class="metinfotop">
+	<div class="position">简体中文：网上办事 > <a href="#">添加事项</a></div>
+
+	</div>
+	<div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="社区动态">添加事项</a></li>
+		<!--<li ><a href="1.html" title="系统邮箱配置">系统邮箱配置</a></li> -->
+	</ul>
+</div>
+<form method="POST" name="myform" action="{% url 'BAdmin:shixiang_add' %}" target="_self" enctype="multipart/form-data">{% csrf_token %}
+
+	<input name="action" type="hidden" value="modify" />
+<table cellpadding="2" cellspacing="1" class="table">
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>名称：<input name="met_name" type="text" class="text" value=""/></td>
+        <td ></td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>事项类型：
+			<select name="met_type">
+                {% for type in shixiangtypelist %}
+                  <option value="{{ type.id }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>事项内容：</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<textarea name="met_content" rows="30" cols="50" ></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename0" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file0" placeholder="" />
+            <input name="switch0" type="checkbox" value="1" />是否公开
+            <input name="must0" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename1" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file1" placeholder="" />
+            <input name="switch1" type="checkbox" value="1" />是否公开
+            <input name="must1" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename2" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file2" placeholder="" />
+            <input name="switch2" type="checkbox" value="1" />是否公开
+            <input name="must2" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename3" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file3" placeholder="" />
+            <input name="switch3" type="checkbox" value="1" />是否公开
+            <input name="must3" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename4" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file4" placeholder="" />
+            <input name="switch4" type="checkbox" value="1" />是否公开
+            <input name="must4" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename5" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file5" placeholder="" />
+            <input name="switch5" type="checkbox" value="1" />是否公开
+            <input name="must5" type="checkbox" value="1">是否必要
+
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename6" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file6" placeholder="" />
+            <input name="switch6" type="checkbox" value="1" />是否公开
+            <input name="must6" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename7" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file7" placeholder="" />
+            <input name="switch7" type="checkbox" value="1" />是否公开
+            <input name="must7" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename8" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file8" placeholder="" />
+            <input name="switch8" type="checkbox" value="1" />是否公开
+            <input name="must8" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件名称：<input name="filename9" type="text"  style="font-size: 15px;"/></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file9" placeholder="" />
+            <input name="switch9" type="checkbox" value="1" />是否公开
+            <input name="must9" type="checkbox" value="1">是否必要
+        </td>
+    </tr>
+
+     <tr><td><span class="tips">记得保存!</span></td></tr>
+
+	<tr>
+        <td class="text"></td>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}

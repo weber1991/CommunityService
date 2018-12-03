@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'base/css/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'base/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.mobile-1.4.5.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'base/themes/Bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/themes/jquery.mobile.icons.min.css' %}">
+	<!-- 引入百度上传插件 -->
+    <script src="{% static 'Eleditor/webuploader.min.js' %}"></script>
+    <!-- 插件核心 -->
+    <script src="{% static 'Eleditor/Eleditor.js' %}"></script>
+{#    <link rel="stylesheet" type="text/css" href="{% static 'kindeditor/lang/zh-CN.js' %}" />#}
+{#    <script type="text/javascript" src="{% static 'kindeditor/kindeditor-all.js' %}"></script>#}
+{#        <script type="text/javascript">KindEditor.ready(function(K) {#}
+{#        K.create('textarea[name="met_sendcontent"]', {#}
+{#        width : "99%",#}
+{#        height : "99%",#}
+{#        uploadJson: '/admin/uploads/kindeditor',#}
+{#        items:["image"],#}
+{#    });#}
+{#        });#}
+{#    </script>#}
+	<style>
+		*{margin: 0;padding: 0;}
+		#article-body{
+			width: 100%;
+			min-height: 200px;
+			box-sizing: border-box;
+			padding: 10px;
+    		color: #444;
+		}
+	</style>
+    {% block css %} {% endblock %}
+    {% block js %} {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+
+<div data-role="page" id="pageone" data-theme="a"   >
+  <div data-role="header" data-position="inline" data-theme="a">
+    <div data-role="navbar">
+					<ul>
+						<li><a href="{% url 'Reception:communityshow' %}" data-icon="home" class="ui-btn-active">首页</a></li>
+						<li><a href="{% url 'Reception:myindex' %}" data-icon="star">个人中心</a></li>
+					</ul>
+    </div>
+      {% block header %} {% endblock %}
+  </div>
+
+  <div data-role="content" data-theme="a">
+      {% block content %} {% endblock %}
+  </div>
+
+  <div data-role="footer" data-theme="a" data-position="fixed">
+      {% block footer %}
+      {% endblock %}
+  </div>
+</div>
+
+</body>
+</html>

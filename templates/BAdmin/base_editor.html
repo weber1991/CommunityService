@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'BAdmin/images/metinfo.css' %}" />
+    <script type="text/javascript" src="{% static 'BAdmin/ckeditor/ckeditor.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'kindeditor/lang/zh-CN.js' %}" />
+    <script type="text/javascript" src="{% static 'kindeditor/kindeditor-all-min.js' %}"></script>
+{% block js %}
+
+{% endblock %}
+
+</head>
+
+<body>
+{% block body %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    咨询动态
+{% endblock %}
+
+{% block content %}
+    <ul data-role="listview" data-divider-theme="d" data-split-theme="d" data-filter="true" data-filter-placeholder="搜索"><!--data-inset="true" -->
+        <li data-role="list-divider" data-theme="b">{{ type.name }}</li>
+        {% for shixiang in shixianglist %}
+        <li>
+            <a href="{% url 'Reception:getshixiang' shixiang.bh %}" style="background-color: white;">
+                <h2>{{ shixiang.name }}</h2>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/footer.html' %}
+{% endblock %}

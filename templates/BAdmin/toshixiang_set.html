@@ -1,0 +1,71 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+{% block js %}
+    <script type="text/javascript">KindEditor.ready(function(K) {
+        K.create('textarea[name="met_backcontent"]', {
+        width : "700px",
+        height : "500px",
+        uploadJson: '/admin/uploads/kindeditor',
+    });
+        });
+    </script>
+{% endblock %}
+
+
+{% block body %}
+	<div class="metinfotop">
+	<div class="position">简体中文：分派订单 > <a href="#">分派订单</a></div>
+
+	</div>
+	<div class="clear"></div>
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="网上办事">分派订单</a></li>
+	</ul>
+</div>
+<form method="POST" name="myform" action="{% url 'BAdmin:toshixiang_set' toshixiang.id %}" target="_self">{% csrf_token %}
+	<input name="action" type="hidden" value="modify" />
+    <table cellpadding="1" class="table" style="text-align: left">
+        <tr >
+        <td class="text" style="text-align: left;"><span class="bi_tian">*</span>申请人：{{ toshixiang.wechatuser.name }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>联系方式：{{ toshixiang.wechatuser.phone }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>申请时间：{{ toshixiang.addtime }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>申请说明：{{ toshixiang.senddata|safe }}</td>
+        </tr>
+
+            <tr>
+        <td class="text"><span class="bi_tian">*</span>申请资料：
+        {% for file in file_list %}
+            <a href="{{ file.url }}">{{ file.name }}&nbsp;</a>
+        {% endfor %}
+        </td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>回复人：
+        <select name="met_user" >
+            {% for user in userlist %}
+                <option value="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+
+        </td>
+    </tr>
+     <tr>
+        <td><span class="tips">记得点击分派!</span></td>
+     </tr>
+	<tr>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="分派" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+    </table>
+</form>
+
+{% endblock %}

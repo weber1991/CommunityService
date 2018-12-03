@@ -1,0 +1,53 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    登陆系统
+{% endblock %}
+
+
+{% block content %}
+    <form action="{% url 'Reception:register' %}" method="POST">{% csrf_token %}
+    <div data-role="fieldcontain">
+		<label for="name">姓名:</label>
+        <input type="text" name="met_name"  required="required"id="met_name" value=""  />
+	</div>
+
+    <div data-role="fieldcontain">
+		<label for="name">身份证:</label>
+        <input type="text" name="met_idcard"  required="required" id="met_idcard" value=""  />
+	</div>
+
+
+    <div data-role="fieldcontain">
+		<label for="name">联系方式:</label>
+        <input type="text" name="met_phone" required="required" id="met_idcard" size="11" value=""  />
+	</div>
+
+    <div data-role="fieldcontain">
+		<label for="name">密码:</label>
+        <input type="password" name="met_password1"  required="required" id="met_password1" value=""  />
+	</div>
+
+    <div data-role="fieldcontain">
+		<label for="name">重复密码:</label>
+        <input type="password" name="met_password2"  required="required" id="met_password2" value=""  />
+	</div>
+
+    <div class="ui-body ui-body-b">
+        <div class="ui-block-b" style="width: 100%;"><button  type="submit" data-theme="a">注册用户</button></div>
+    </div>
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:backpassword' %}" data-icon="grid">重置密码</a></li>
+            <li><a href="{% url 'Reception:login' %}" data-icon="minus">登陆</a></li>
+            <li><a href="{% url 'Reception:register' %}" data-icon="grid">注册</a></li>
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'Reception/_base.html' %}
+{% block content %}
+    <div class="weui-cells">
+    {% for service in servicelist %}
+        <form method="post" action="{% url 'Reception:ticket_get' %}">{% csrf_token %}
+            <input name="met_serviceid" type="hidden" value="{{ service.id }}">
+  <div class="weui-cell weui-cell_access">
+    <div class="weui-cell__bd">
+      <p>{{ service.name }}</p>
+    </div>
+      <input class="weui-cell__ft" type="submit" value="取号">
+  </div>
+        </form>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}

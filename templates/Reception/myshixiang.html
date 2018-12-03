@@ -1,0 +1,26 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    我的事项
+{% endblock %}
+
+{% block content %}
+    <ul data-role="listview" data-divider-theme="d" data-split-theme="d" data-filter="true" data-filter-placeholder="搜索"><!--data-inset="true" -->
+    {% for toshixiang in toshixianglist %}
+        <li>
+            <a href="{% url 'Reception:mytoshixiang' toshixiang.id %}" style="background-color: white;">
+                <h2>{{ toshixiang.shixiang.name }}</h2>
+                <p>时间:{{ toshixiang.addtime }}</p>
+                <p style="color: red"><b>状态:</b>{{ toshixiang.state }}</p>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/myfooter.html' %}
+{% endblock %}

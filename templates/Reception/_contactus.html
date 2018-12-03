@@ -1,0 +1,10 @@
+{% extends 'Reception/_base.html' %}
+{% block content %}
+    <h1 style="text-align: center;">{{ contactdata.title }}</h1>
+    <p>{{ contactdata.content|safe }}</p>
+    <p>{{ contactdata.author }}</p>
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}

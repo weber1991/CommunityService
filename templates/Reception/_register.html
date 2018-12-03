@@ -1,0 +1,97 @@
+{% extends 'Reception/_base.html' %}
+
+{% block title %}
+    登陆系统
+{% endblock %}
+
+{% block content %}
+    <form id='form_register' action="{% url 'Reception:register' %}" method="POST">{% csrf_token %}
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
+    <div class="weui-cell__bd">
+{#      <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入身份证号码">#}
+        <input name="met_name" class="weui-input" type="text" placeholder="请输入昵称.....">
+    </div>
+  </div>
+
+  <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">&nbsp;
+    </div>
+    <div class="weui-cell__bd">&nbsp;
+    </div>
+  </div>
+
+  <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">
+      <label class="weui-label">身份证</label>
+    </div>
+    <div class="weui-cell__bd">
+      <input name="met_idcard" class="weui-input" type="text" placeholder="请输入身份证....">
+    </div>
+  </div>
+  <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">&nbsp;
+    </div>
+    <div class="weui-cell__bd">&nbsp;
+    </div>
+  </div>
+
+  <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">
+      <label class="weui-label">联系方式（登陆账号）</label>
+    </div>
+    <div class="weui-cell__bd">
+      <input name="met_phone" class="weui-input" type="text" placeholder="请输入手机号码....">
+    </div>
+  </div>
+
+      <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">&nbsp;
+    </div>
+    <div class="weui-cell__bd">&nbsp;
+    </div>
+  </div>
+
+    <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">
+      <label class="weui-label">密码</label>
+    </div>
+    <div class="weui-cell__bd">
+      <input name="met_password1" class="weui-input" type="password" placeholder="请输入密码....">
+    </div>
+  </div>
+  <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">&nbsp;
+    </div>
+    <div class="weui-cell__bd">&nbsp;
+    </div>
+  </div>
+    <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">
+      <label class="weui-label">确认密码</label>
+    </div>
+    <div class="weui-cell__bd">
+      <input name="met_password2" class="weui-input" type="password" placeholder="请再次输入密码....">
+    </div>
+  </div>
+
+    <div class="weui-btn-area">
+      <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="tosubmit()">注&nbsp;&nbsp;册</a>
+    </div>
+</div>
+</form>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        function tosubmit() {
+            document.getElementById('form_register').submit();
+        }
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/_foot_login.html' %}
+{% endblock %}

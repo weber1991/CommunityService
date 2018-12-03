@@ -1,0 +1,24 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    事项分类
+{% endblock %}
+
+{% block content %}
+    <ul data-role="listview" data-divider-theme="d" data-inset="true"><!--data-inset="true" -->
+    {% for type in shixiangtypelist %}
+        <li>
+            <a href="{% url 'Reception:showshixiang' type.id %}" style="background-color: white;">
+                <h2>{{ type.name }}</h2>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/footer.html' %}
+{% endblock %}

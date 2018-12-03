@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'BAdmin/images/metinfo.css' %}" />
+<script type="text/javascript" src="{% static 'BAdmin/ckeditor/ckeditor.js' %}"></script>
+
+</head>
+
+<body>
+
+	<div class="metinfotop">
+	<div class="position">简体中文：网上办事 > <a href="1.html">查询指南</a></div>
+
+	</div>
+	<div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="社区动态">查询咨询</a></li>
+		<!--<li ><a href="1.html" title="系统邮箱配置">系统邮箱配置</a></li> -->
+	</ul>
+</div>
+<table cellpadding="1" cellspacing="0" border="1" class="table">
+    <tr> 
+        <th class=""><span class="bi_tian">*</span>序号</th>
+        <th class=""><span class="bi_tian">*</span>名称</th>
+        <th class=""><span class="bi_tian">*</span>类型</th>
+        <th class=""><span class="bi_tian">*</span>状态</th>
+        <th class=""><span class="bi_tian">*</span>网上申办</th>
+        <th class=""><span class="bi_tian">*</span>操作</th>
+    </tr>
+     {% for shixiang in shixianglist %}
+    <tr style="text-align: center">
+        <td class=""><span class="">{{ forloop.counter }}</span></td>
+        <td class=""><span class="">{{ shixiang.name }}</span></td>
+        <td class=""><span class="">{{ shixiang.type }}</span></td>
+        <td class=""><span class="">{{ shixiang.sxzt }}</span></td>
+        <td class=""><span class="">{{ shixiang.handle }}</span></td>
+        <td class="">
+            <span class="">
+            <a href="{% url 'BAdmin:shixiang_data' shixiang.bh %}">编辑</a>
+                &nbsp;&nbsp;<a href="{% url 'BAdmin:shixiang_delete' shixiang.bh %}">删除</a>
+                &nbsp;&nbsp;<a href="{% url 'BAdmin:shixiang_change' shixiang.bh %}">更改状态</a>
+                &nbsp;&nbsp;<a href="{% url 'BAdmin:shixiang_handle' shixiang.bh %}">更改发布</a>
+            </span>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</body>
+</html>

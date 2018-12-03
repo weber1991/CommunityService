@@ -1,0 +1,58 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block js %}
+
+{% endblock %}
+
+{% block title %}
+    我要留言
+{% endblock %}
+
+
+{% block content %}
+    <h2 style="text-align: center;">我要留言</h2>
+    <form action="{% url 'Reception:setmessage' %}" method="POST">{% csrf_token %}
+    <div data-role="fieldcontain">
+		<label for="name">留言人:</label>
+        <input type="text" name="met_sendname" id="sendname" readonly="readonly" value="{{ wechatuser.name }}"  />
+	</div>
+    <div data-role="fieldcontain">
+		<label for="name">联系方式:</label>
+        <input type="text" name="met_sendphone" id="sendphone" readonly="readonly" value="{{ wechatuser.phone }}"  />
+	</div>
+    <div data-role="fieldcontain">
+		<label for="name">标题:</label>
+        <input type="text" name="met_sendtitle" id="sendtitle" required="required" value=""  />
+	</div>
+    <div data-role="fieldcontain">
+        <label for="textarea">留言内容:</label>
+    </div>
+            <div id="article-body"  style="border: 1px solid gainsboro; z-index: 100;" ></div>
+               <div class="ui-block-b" style="width: 100%;margin-top:50%; "><button id='saveBtn' type="submit" data-theme="a" onclick="save_content();">留言</button></div>
+
+    <textarea id="met_sendcontent"  name="met_sendcontent" style="display:none;" ></textarea>
+    </form>
+<script>
+/*实例化一个编辑器*/
+var artEditor = new Eleditor({
+						el: '#article-body',
+						upload:{
+							server: '/Eleditor_small_uploads/Reception',
+							fileSizeLimit: 2,
+                            formName:'imgFile',
+						}
+					});
+
+function save_content() {
+    var _content = artEditor.getContent();
+    var sendcontent = document.getElementById('met_sendcontent');
+    sendcontent.innerHTML = _content;
+}
+</script>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

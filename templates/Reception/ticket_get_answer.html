@@ -1,0 +1,21 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    取票结果
+{% endblock %}
+
+
+{% block content %}
+    <h1 style="text-align: center;">{{ title }}</h1>
+    <p>{{ answer|safe }}</p>
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:ticket_wait' %}" data-icon="grid">等候情况</a></li>
+        </ul>
+    </div>
+{% endblock %}

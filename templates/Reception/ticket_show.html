@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="5">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'base/css/jquery.mobile-1.4.5.min.css' %}">
+    <script src="{% static 'base/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.mobile-1.4.5.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'base/themes/Bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/themes/jquery.mobile.icons.min.css' %}">
+    <title>等候情况-大厅展示</title>
+</head>
+<body>
+
+<div data-role="page" id="pageone" data-theme="a"   >
+  <div data-role="header" data-position="inline" data-theme="a">
+  </div>
+
+  <div data-role="content" data-theme="a">
+          <h1 style="text-align: center;">{{ today }}取号情况</h1>
+    <ul data-role="listview" data-divider-theme="d" data-split-theme="d" ><!--data-inset="true" -->
+        {% for wait in waitlist %}
+        <li data-role="list-divider" data-theme="b" style="font-size: large;">{{ wait.service.name }}</li>
+        <li>等候人数&nbsp;:&nbsp;<b>{{ wait.count|default_if_none:'无' }}</b></li>
+        <li>当前办理票号&nbsp;:&nbsp;<b>{{ wait.doing|default_if_none:'无' }}</b></li>
+            <li>下一个办理票号&nbsp;:&nbsp;<b>{{ wait.net|default_if_none:'无' }}</b></li>
+        {% endfor %}
+    </ul>
+
+  </div>
+
+  <div data-role="footer" data-theme="a" data-position="fixed">
+
+  </div>
+</div>
+
+</body>
+</html>

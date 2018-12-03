@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+
+ <script src="{% static 'Reception/js/mui.min.js' %}"></script>
+  <script src="{% static 'Reception/js/jquery-2.1.4.js' %}"></script>
+  <script src="{% static 'Reception/js/fastclick.js' %}"></script>
+ <script src="{% static 'Reception/js/jquery.qrcode.min.js' %}"></script>
+  <script language="javascript" src="{% static 'Reception/js/LodopFuncs.js' %}"></script>
+
+        {% include 'Reception/_head.html' %}
+    <style>
+      .weui-footer {
+        margin: 25px 0 10px 0;
+      }
+    </style>
+  </head>
+
+  <body ontouchstart>
+ <div class="weui-tab">
+  <!-- 这个用来填充效果 -->
+
+<div class="weui-msg">
+{#  <div class="weui-msg__icon-area"><img src="{% static 'Reception/images/cfsq.jpg' %}"></div>#}
+  <div class="weui-msg__text-area">
+    <h2 class="weui-msg__title">长富社区公共服务中心(现场取号)</h2>
+    <p class="weui-msg__desc">一号一业务，注意叫号信息，过号须重新取号。</p>
+  </div>
+<div class="weui-grids">
+    {% for service in servicelist %}
+        <form id="{{ service.id }}" method="post" action="{% url 'Reception:ticket_get_pc' %}">{% csrf_token %}
+            <input name="met_serviceid" type="hidden" value="{{ service.id }}">
+  <div name="{{ service.id }}" class="weui-grid js_grid ticketbutton"  onclick="submittikcet(this)">
+    <p class="weui-grid__label weui-btn weui-btn_primary ticketbuttonp" style="width:80%;color: white;font-size:150%;">
+        {{ service.name }}
+    </p>
+  </div>
+        </form>
+    {% endfor %}
+
+{% if printTicket.state == 1 %}
+<div id="PrintTicket" style="width: 100%;display: none;" >
+    <div style="width:100%;font-size: 18px;margin-left: 13%;font-family: SimHei;"><b>长富社区公共服务中心</b></div>
+<div style="width: 45%;float: left;">
+    <p style="font-size: 16px;">票号：<b>{{ ticket.no }}</b></p>
+    <p style="font-size: 12px;">业务：{{ ticket.service.name }}</p>
+    <p style="font-size: 12px;">取票时间：{{ ticket.addtime }}</p>
+    <p style="font-size: 12px;">备注：当天呼号有效，过号须重新取号。请留意显示屏及呼号语音。</p>
+</div>
+    <div style="width: 25%;float: left;">
+<div id="qrcode" style="text-align: center;"></div>
+        <div style="text-align: center;margin-top:8%;font-size: 10px;">微信扫码可评价</div>
+    </div>
+</div>
+{% endif %}
+
+</div>
+
+</div>
+
+  <div class="weui-footer">
+{#      <p class="weui-footer__links">#}
+{#        <a href="http://jqweui.com" class="weui-footer__link">jQuery-WeUI 首页</a>#}
+{#      </p>#}
+ <p class="weui-footer__text" style="color: #f0f0f0">Design by ****</p>
+ </div>
+
+
+  </div>
+ <script src="{% static 'Reception/js/mui.min.js' %}"></script>
+  <script src="{% static 'Reception/js/jquery-2.1.4.js' %}"></script>
+  <script src="{% static 'Reception/js/fastclick.js' %}"></script>
+ <script src="{% static 'Reception/js/jquery.qrcode.min.js' %}"></script>
+  <script>
+      $('#qrcode').empty();
+      jQuery('#qrcode').qrcode({
+          render: "canvas",
+          width:80,
+          height:80,
+          text:"{{ printTicket.url }}",
+      });
+      var  canvas = $('#qrcode canvas');
+      var img = canvas[0].toDataURL("image/png");
+      $('#qrcode').html("<img src='"+img +"'>");
+      // alert("{{ printTicket.url }}");
+  </script>
+  <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+  </script>
+  <script src="{% static 'Reception/js/jquery-weui.js' %}"></script>
+  <script>
+      var LODOP; //声明为全局变量
+      {% if printTicket.state == 1 %}
+
+window.onload = function () {
+    disableticketbutton()
+    setTimeout("prn1_preview()",600);
+    //setTimeout("prn1_print()",600);
+    setTimeout("ableticketbutton()", 4000)
+    //CreateOneFormPage();
+	//LODOP.PREVIEW();
+    //LODOP.PRINT();
+}
+      {% endif %}
+
+      function disableticketbutton() {
+         $(".ticketbutton").attr("onclick","document.getElementById('{{ service.id }}').onclick = null");
+         $(".ticketbuttonp").css("background-color","Gray");
+      }
+      function ableticketbutton() {
+          $(".ticketbutton").attr("onclick","submittikcet(this)");
+          $(".ticketbuttonp").css("background-color","#1AAD19");
+      }
+      function submittikcet(obj) {
+          var ticketid = $(obj).attr('name');
+          document.getElementById(ticketid).submit();
+      }
+	function prn1_preview() {
+		CreateOneFormPage();
+		LODOP.PREVIEW();
+		//setTimeout(alert("取号成功。"),1000);
+	};
+	function prn1_print() {
+		CreateOneFormPage();
+		LODOP.PRINT();
+		//setTimeout(alert("取号成功。"),1000);
+	};
+		function CreateOneFormPage(){
+		LODOP=getLodop();
+		LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
+		LODOP.SET_PRINT_PAGESIZE(0,800,500,"")
+		LODOP.SET_PRINT_STYLE("FontSize",10);
+		LODOP.SET_PRINT_STYLE("Bold",1);
+		LODOP.ADD_PRINT_HTM(0,2,350,300,document.getElementById("PrintTicket").innerHTML);
+	};
+
+  </script>
+  </body>
+</html>

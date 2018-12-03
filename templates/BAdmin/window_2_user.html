@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'BAdmin/images/metinfo.css' %}" />
+<script type="text/javascript" src="{% static 'BAdmin/ckeditor/ckeditor.js' %}"></script>
+
+</head>
+
+<body>
+
+	<div class="metinfotop">
+	<div class="position">简体中文：网上办事 > <a href="">窗口配置</a></div>
+
+	</div>
+	<div class="clear"></div>
+<form method="POST" name="myform" action="{% url 'BAdmin:window_2_user' %}" target="_self">{% csrf_token %}
+	<input name="action" type="hidden" value="modify" />
+    <table cellpadding="2" cellspacing="1" class="table">
+
+   <tr>
+        <td class="text"><span class="bi_tian">*</span>选择窗口：</td>
+        <td >
+			<select name="met_windowid">
+                {% for window in windowlist %}
+                  <option value="{{ window.id }}">{{ window.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="text"></td>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+
+  </table>
+    {% if state %}
+    <table cellpadding="2" cellspacing="1" class="table">
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>用户姓名：</td>
+        <td class="input">{{ buser.username }}</td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>绑定窗口：</td>
+        <td class="input">{{ window2user.window }}</td>
+    </tr>
+  </table>
+
+    {% endif %}
+</form>
+
+
+</body>
+</html>

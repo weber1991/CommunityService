@@ -1,0 +1,60 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+{% block js %}
+    <script type="text/javascript">KindEditor.ready(function(K) {
+        K.create('textarea[name="met_content"]', {
+        width : "800px",
+        height : "500px",
+        uploadJson: '/admin/uploads/kindeditor',
+    });
+        });
+    </script>
+{% endblock %}
+{% block body %}
+
+	<div class="metinfotop">
+	<div class="position">简体中文：系统设置 > <a href="#">基本设置</a></div>
+
+	</div>
+	<div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="1.html" title="基本信息">志愿者</a></li>
+	</ul>
+</div>
+<form method="POST" name="myform" action="{% url 'BAdmin:becomevolunteer_editor' %}" target="_self">{% csrf_token %}
+
+	<input name="action" type="hidden" value="modify" />
+<table cellpadding="2" cellspacing="1" class="table">
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>发布人：</td>
+        <td class="input">
+			<input name="met_author" type="text " class="text gen" value="{{ volunteer.author }}" />
+        </td>
+    </tr>
+
+    <tr>
+      <td class="text"><span class="bi_tian">*</span>编辑内容：</td>
+      <td class="input">&nbsp;</td>
+    </tr>
+
+    <tr> 
+        <td colspan="2" class="text">
+			<textarea name="met_content" rows="30" cols="50" >{{ volunteer.content }}</textarea>
+        </td>
+    </tr>
+
+    <tr><td><span class="tips">记得保存!</span></td></tr>
+
+	<tr> 
+        <td class="text"></td>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

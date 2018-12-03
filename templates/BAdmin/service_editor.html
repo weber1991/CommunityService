@@ -1,0 +1,55 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+
+{% block body %}
+	<div class="metinfotop">
+	<div class="position">简体中文：预约取号 > <a href="#">修改业务</a></div>
+
+	</div>
+	<div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="{% url 'BAdmin:service_add' %}" title="预约取号">修改业务</a></li>
+	</ul>
+</div>
+<form method="POST" name="myform" action="{% url 'BAdmin:service_editor' service.id %}" target="_self">{% csrf_token %}
+	<input name="action" type="hidden" value="modify" />
+    <table cellpadding="2" cellspacing="1" class="table">
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>业务名称：</td>
+        <td class="input"><input name="met_name" type="text" required="required" class="text" value="{{ service.name }}"/></td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>业务类型：</td>
+        <td class="input">
+			<input name="met_type" type="text " class="text gen" required="required"  value="{{ service.type }}" placeholder="比如A,B,C...." />
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>业务办理窗口：</td>
+        <td class="input">
+			<input name="met_window" type="text " required="required"  class="text gen" value="{{ service.window }}" />
+        </td>
+    </tr>
+
+    <tr><td class="text"><span class="bi_tian">*</span>备注内容：</td>
+        <td colspan="2" class="text">
+			<textarea name="met_note" rows="20" cols="50">{{ service.note }}
+            </textarea>
+        </td>
+    </tr>
+
+	<tr>
+        <td class="text">记得保存!</td>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}

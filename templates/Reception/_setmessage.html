@@ -1,0 +1,82 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+{% block title %}
+    办理事项
+{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center;color: #0BB20C;">我要留言</h2>
+    <form id="form_setmessage" action="{% url 'Reception:setmessage' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">办理人</label></div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="text" name="met_sendname" id="sendname" readonly="readonly" value="{{ wechatuser.name }}"  />
+    </div>
+  </div>
+
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">联系方式</label></div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="text" name="met_sendphone" id="sendphone" readonly="readonly" value="{{ wechatuser.phone }}"  />
+    </div>
+  </div>
+<div class="weui-cells__title">标题</div>
+<div class="weui-cells">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <input name="met_sendtitle" class="weui-input" type="text" placeholder="请输入标题....">
+    </div>
+  </div>
+</div>
+  <div class="weui-cells__title">留言内容(必填)</div>
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      <textarea name="met_sendcontent" class="weui-textarea" placeholder="请输入留言内容....." rows="3"></textarea>
+    </div>
+  </div>
+</div>
+<div class="weui-media-box weui-media-box_text">
+    <h2 class="weui-media-box__title">添加图片</h2>
+            <p class="weui-media-box__desc"><input name="file"  type="file" accept="image/*" /></p>
+            <p class="weui-media-box__desc"><input name="file"  type="file" accept="image/*" /></p>
+            <p class="weui-media-box__desc"><input name="file"  type="file" accept="image/*" /></p>
+</div>
+    <div class="weui-btn-area">
+      <a  style="" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="tosubmit()">提&nbsp;&nbsp;交</a>
+    </div>
+</div>
+</form>
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+        function tosubmit() {
+            {#var _content = artEditor.getContent();#}
+            {#var sendcontent = document.getElementById('met_sendcontent');#}
+            {#sendcontent.innerHTML = _content;#}
+            document.getElementById('form_setmessage').submit();
+        }
+{#/*实例化一个编辑器*/#}
+{#var artEditor = new Eleditor({#}
+{#						el: '#article-body',#}
+{#						upload:{#}
+{#							server: '/Eleditor_uploads/Reception',#}
+{#							fileSizeLimit: 2,#}
+{#                            formName:'imgFile',#}
+{#						}#}
+{#					});#}
+</script>
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'Reception/_foot.html' %}
+{% endblock %}
+

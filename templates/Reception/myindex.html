@@ -1,0 +1,22 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+个人中心
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center">最新公告</h1>
+    <ul data-role="listview" data-divider-theme="d" data-split-theme="d" data-inset="true" ><!--data-inset="true" -->
+        <li>
+        <a href="{% url 'Reception:getblog' lastblog.id %}" style="background-color: white;">
+            <h2>{{ lastblog.title }}</h2>
+            <p>{{ lastblog.user }} 发布于{{ lastblog.date_publish }}</p>
+        </a>
+    </li>
+    </ul>
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/myfooter.html' %}
+{% endblock %}

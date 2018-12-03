@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>{% block title %}{% endblock %}</title>
+      {% include 'Reception/_head.html' %}
+    <style>
+      .weui-footer {
+        margin: 25px 0 10px 0;
+      }
+th {
+    border-bottom: 1px solid #d6d6d6;
+}
+
+tr:nth-child(even) {
+    background: #e9e9e9;
+}
+.placeholder{
+    font-size: 2rem;
+}
+</style>
+<Script language="javascript">
+function GetRequest() {
+var url = location.search; //获取url中"?"符后的字串
+var theRequest = new Object();
+if (url.indexOf("?") != -1) {
+var str = url.substr(1);
+strs = str.split("&");
+for(var i = 0; i < strs.length; i ++) {
+theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+}
+}
+return theRequest;
+}
+function doTTS(){
+
+			var ttsDiv = document.getElementById('bdtts_div_id');
+			var ttsAudio = document.getElementById('tts_autio_id');
+			var ttsText = '111111';
+
+			// 另一种模式
+			/*var ssrcc = 'http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=10&text='+ttsText;
+			document.getElementById('tts_source_id').src=ssrcc;*/
+
+			//
+			ttsDiv.removeChild(ttsAudio);
+
+			var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+			var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=6&text='+ttsText+'" type="audio/mpeg">';
+			var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+			var au2 = '</audio>';
+			ttsDiv.innerHTML = au1 + sss + eee + au2;
+
+			ttsAudio = document.getElementById('tts_autio_id');
+
+			ttsAudio.play();
+		}
+</Script>
+
+  </head>
+  <body ontouchstart>
+ <div class="weui-tab">
+  <!-- 这个用来填充效果 -->
+  <header class='demos-header'>{% block header_title %} {% endblock %}</header>
+   <h1 class="demos-title">{{ today }}取号情况</h1>
+        <div class="weui-flex">
+      <div class="weui-flex__item"><div class="placeholder">窗口名称</div></div>
+      <div class="weui-flex__item"><div class="placeholder">等候人数</div></div>
+      <div class="weui-flex__item"><div class="placeholder">目前办理</div></div>
+      <div class="weui-flex__item"><div class="placeholder">下一个</div></div>
+    </div>
+ {% for wait in waitlist %}
+              <div class="weui-flex">
+      <div class="weui-flex__item"><div class="placeholder">{{ wait.window.name}}</div></div>
+      <div class="weui-flex__item"><div class="placeholder">{{ wait.count|default_if_none:'无' }}</div></div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                {% for do in wait.doing %}
+                    {% if forloop.first %}
+                        {{ do.no }}
+                    {% else %}
+                        ,{{ do.no }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="weui-flex__item"><div class="placeholder">{{ wait.net|default_if_none:'无' }}</div></div>
+    </div>
+    {% endfor %}
+  <div class="weui-footer">
+      		<div id="bdtts_div_id">
+			<audio id="tts_autio_id" autoplay="autoplay" >
+				<source id="tts_source_id" src="http://tts.baidu.com/text2audio?idx=1&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&vol=5&pit=5&per=0&tex=" type="audio/mpeg">
+				<embed id="tts_embed_id" height="0" width="0" src="">
+			</audio>
+		</div>
+ <p class="weui-footer__text" style="color: #f0f0f0">Design by weber</p>
+ </div>
+  </div>
+  <script src="{% static 'Reception/js/jquery-2.1.4.js' %}"></script>
+  <script src="{% static 'Reception/js/fastclick.js' %}"></script>
+  <script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+  </script>
+  <script src="{% static 'Reception/js/jquery-weui.js' %}"></script>
+
+  <script type="text/javascript">
+
+      {% if call_state %}
+          var ttsDiv = document.getElementById('bdtts_div_id');
+		var ttsAudio = document.getElementById('tts_autio_id');
+		var ttsText = "请" + '{{ ticket_call_start.no }}' + "到"+ '{{ ticket_call_start.window.name }}' +"办理业务";
+
+
+          // 另一种模式
+		/*var ssrcc = 'http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=10&text='+ttsText;
+		document.getElementById('tts_source_id').src=ssrcc;*/
+
+		//
+		ttsDiv.removeChild(ttsAudio);
+        var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+        //var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text='+ttsText+'" type="audio/mpeg">';
+        var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?idx=1&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&vol=5&pit=5&per=0&tex='+ ttsText+ '" type="audio/mpeg">';
+        var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+        var au2 = '</audio>';
+        ttsDiv.innerHTML = au1 + sss + eee + au2;
+
+        ttsAudio = document.getElementById('tts_autio_id');
+        ttsAudio.play();
+        var time = 4;
+           tourl = "http://127.0.0.1:8000/Reception/ticket_show/?ticketno=" + {{ ticket_call_start.id }};
+          // tourl = "http://changfushequ.top/Reception/ticket_show/?ticketno=" + {{ ticket_call_start.id }};
+　　　　　function Redirect() {
+                //alert(ticketno_session);
+ 　　　　　　　　window.location = tourl;
+　　　　　};
+    timer = setTimeout('Redirect()', time * 1000); //跳转
+
+      {% else %}
+           var time = 4;
+           tourl = "http://127.0.0.1:8000/Reception/ticket_show/?ticketno=" + "-1";
+          // tourl = "http://changfushequ.top/Reception/ticket_show/?ticketno=" + "-1";
+　　　　　function Redirect() {
+                //alert(ticketno_session);
+ 　　　　　　　　window.location = tourl;
+　　　　　}
+    timer = setTimeout('Redirect()', time * 1000);
+      {% endif %}
+  </script>
+  </body>
+</html>

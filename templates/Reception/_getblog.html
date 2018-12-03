@@ -1,0 +1,15 @@
+{% extends 'Reception/_base.html' %}
+{% block content %}
+    <div class="weui-media-box weui-media-box_text">
+        <h4 class="weui-media-box__title" style="font-size: 1.5rem;text-align: center;">{{ blog.title }}</h4>
+        <p class="weui-media-box__desc">{{ blog.content|safe }}</p>
+        <ul class="weui-media-box__info">
+            <li class="weui-media-box__info__meta">发表人：{{ blog.user }}</li>
+            <li class="weui-media-box__info__meta">时间：{{ blog.date_publish }}</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}

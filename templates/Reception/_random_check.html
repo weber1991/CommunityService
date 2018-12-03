@@ -1,0 +1,37 @@
+{% extends 'Reception/_base.html' %}
+
+{% block title %}
+    取号验证
+{% endblock %}
+
+
+{% block content %}
+  <h1 class="demos-title">长富社区办事大厅<br>微信取号</h1>
+    <form id="form_random" action="{% url 'Reception:random_check' %}" method="POST">{% csrf_token %}
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">随机码</label></div>
+    <div class="weui-cell__bd">
+{#      <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入身份证号码">#}
+        <input name="met_randomnumber" class="weui-input" type="text" placeholder="请输入随机码.....">
+    </div>
+  </div>
+    <div class="weui-btn-area">
+      <a class="weui-btn weui-btn_primary" href="javascript:" id="login" onclick="tosubmit()">验证</a>
+    </div>
+</div>
+    </form>
+
+{% endblock %}
+
+{% block js %}
+<script>
+        function tosubmit() {
+            document.getElementById('form_random').submit();
+        }
+</script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/_foot.html' %}
+{% endblock %}

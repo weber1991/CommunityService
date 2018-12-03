@@ -1,0 +1,81 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+{% block js %}
+
+{% endblock %}
+
+
+{% block body %}
+	<div class="metinfotop">
+	<div class="position">简体中文：回复留言 > <a href="#">回复留言</a></div>
+
+	</div>
+	<div class="clear"></div>
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="书记信箱">回复留言</a></li>
+	</ul>
+</div>
+<form method="POST" name="myform" action="{% url 'BAdmin:message_check' message.id %}" target="_self">{% csrf_token %}
+	<input name="action" type="hidden" value="modify" />
+    <table cellpadding="1" class="table" style="text-align: left">
+        <tr >
+        <td class="text" style="text-align: left;"><span class="bi_tian">*</span>标题：{{ message.sendtitle }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>留言人：{{ message.sendname }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>留言时间：{{ message.sendtime }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>联系方式：{{ message.sendphone }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>留言内容：{{ message.sendcontent|safe }}</td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>附件：
+            {% if message.file0 %}
+                <a href="{{ message.file0 }}">图片&nbsp;</a>
+            {% endif %}
+                    {% if message.file1 %}
+                <a href="{{ message.file1 }}">图片&nbsp;</a>
+            {% endif %}
+                    {% if message.file2 %}
+                <a href="{{ message.file2 }}">图片&nbsp;</a>
+            {% endif %}
+        </td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>回复人：{{ message.backname }}</td>
+    </tr>
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>回复内容：</td>
+    </tr>
+        <tr>
+        <td colspan="2" class="text">
+			{{ message.backcontent|safe }}
+        </td>
+    </tr>
+            <tr>
+        <td colspan="2" class="text"><span class="bi_tian">*</span>审阅结果：
+            <input name="met_check" type="radio" value="已回复" checked="checked"/>通过
+            <input name="met_check" type="radio" value="待回复" />不通过
+        </td>
+    </tr>
+
+     <tr>
+        <td><span class="tips">记得点击保存!</span></td>
+     </tr>
+	<tr>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+    </table>
+</form>
+
+{% endblock %}

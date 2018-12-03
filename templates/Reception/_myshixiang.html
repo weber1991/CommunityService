@@ -1,0 +1,21 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+
+
+{% block content %}
+   {% for toshixiang in toshixianglist %}
+       {% if toshixiang.state == '通过' or toshixiang.state == '退回' %}
+        <h4 class="weui-media-box__title"><a href="{% url 'Reception:mytoshixiang' toshixiang.id %}">{{ toshixiang.shixiang.name }}({{ toshixiang.state }})</a></h4>
+        {% else %}
+               <h4 class="weui-media-box__title">{{ toshixiang.shixiang.name }}(待回复)</h4>
+       {% endif %}
+            <ul class="weui-media-box__info">
+              <li class="weui-media-box__info__meta">时间:{{ toshixiang.addtime }}</li>
+            </ul>
+    {% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/_myfoot.html' %}
+{% endblock %}

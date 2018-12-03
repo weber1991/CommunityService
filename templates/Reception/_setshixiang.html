@@ -1,0 +1,142 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block css %}
+    <script src="{% static 'base/js/jquery-1.11.0.min.js' %}"></script>
+	<!-- 引入百度上传插件 -->
+    <script src="{% static 'Eleditor/webuploader.min.js' %}"></script>
+    <!-- 插件核心 -->
+    <script src="{% static 'Eleditor/Eleditor.js' %}"></script>
+    	<style>
+		*{margin: 0;padding: 0;}
+		#article-body{
+			width: 100%;
+			min-height: 300px;
+			box-sizing: border-box;
+			padding: 10px;
+    		color: #444;
+		}
+	</style>
+{% endblock %}
+{% block title %}
+    办理事项
+{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center;color: #0BB20C;">办理{{ shixiang.name }}</h2>
+    <form id="form_setshixiang" action="{% url 'Reception:setshixiang' shixiang.bh %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">办理人</label></div>
+    <div class="weui-cell__bd">
+        <input name="met_name" class="weui-input" type="text" readonly="readonly" value="{{ wechatuser.name }}" >
+    </div>
+  </div>
+
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">联系方式</label></div>
+    <div class="weui-cell__bd">
+        <input name="met_phone" class="weui-input" type="text" readonly="readonly" value="{{ wechatuser.phone }}" >
+    </div>
+  </div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_text">
+                    <h2 class="weui-media-box__title">事项所需“上传材料”</h2>
+                    <p class="weui-media-box__desc">
+                    {% for file in switch_file_list %}
+                        <a href="{{ file.url }}">{{ file.name }}&nbsp;</a>
+                     {% endfor %}
+                    </p>
+                </div>
+{#                <div class="weui-media-box weui-media-box_text">#}
+{#                    <h2 class="weui-media-box__title">事项必须材料</h2>#}
+{#                    <p class="weui-media-box__desc">#}
+{#                    {% for file in must_file_list %}#}
+{#                        {{ file.name }}&nbsp;#}
+{#                     {% endfor %}#}
+{#                    </p>#}
+{#                    </p>#}
+{#                </div>#}
+            <div class="weui-media-box weui-media-box_text">
+                    <h2 class="weui-media-box__title">添加材料</h2>
+                {% for file in switch_file_list %}
+                    <p class="weui-media-box__desc"><input name="filename" class="weui-input" type="text" readonly="readonly" value="上传{{ file.name }}" ></p>
+                        <p class="weui-media-box__desc"><input name="file"  type="file" accept="image/*" /></p>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+</div>
+    <div class="weui-btn-area">
+      <a  style="margin-top:10%;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="tosubmit()">提&nbsp;&nbsp;交</a>
+    </div>
+</form>
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+        function tosubmit() {
+            {#var _content = artEditor.getContent();#}
+            {#var sendcontent = document.getElementById('met_sendcontent');#}
+            {#sendcontent.innerHTML = _content;#}
+            document.getElementById('form_setshixiang').submit();
+        }
+/*实例化一个编辑器*/
+{#var artEditor = new Eleditor({#}
+{#						el: '#article-body',#}
+{#						upload:{#}
+{#							server: '/Eleditor_uploads/Reception',#}
+{#							fileSizeLimit: 2,#}
+{#                            formName:'imgFile',#}
+{#						}#}
+{#					});#}
+</script>
+<script>
+    mui.init();
+    $(function() {
+        var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+            $gallery = $("#gallery"),
+            $galleryImg = $("#galleryImg"),
+            $uploaderInput = $("#uploaderInput"),
+            $uploaderFiles = $("#uploaderFiles");
+        $uploaderInput.on("change", function (e) {
+            $uploaderFiles.empty();
+            var src, url = window.URL || window.webkitURL || window.mozURL,
+                files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+                $uploaderFiles.append($(tmpl.replace('#url#', src)));
+            }
+        });
+        var index; //第几张图片
+        $uploaderFiles.on("click", "li", function () {
+            index = $(this).index();
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function () {
+            $gallery.fadeOut(100);
+        });        //删除图片
+        $(".weui-gallery__del").click(function () {
+            $uploaderFiles.find("li").eq(index).remove();
+        });
+    });
+
+
+</script>
+
+
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
+

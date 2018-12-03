@@ -1,0 +1,24 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    事项详情
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center;">{{ shixiang.name }}</h1>
+    {{ shixiang.content|safe }}
+{% endblock %}
+
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:showshixiangtype' %}" data-icon="minus">办事指南</a></li>
+            {% if shixiang.handle == '是' %}
+            <li><a href="{% url 'Reception:setshixiang' shixiang.bh %}" data-icon="grid">我要办理</a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}

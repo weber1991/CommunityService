@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'BAdmin/images/metinfo.css' %}" />
+<script type="text/javascript" src="{% static 'BAdmin/ckeditor/ckeditor.js' %}"></script>
+
+</head>
+
+<body>
+
+	<div class="metinfotop">
+	<div class="position">简体中文：网上办事 > <a href="">随即码</a></div>
+
+	</div>
+	<div class="clear"></div>
+<form method="POST" name="myform" action="{% url 'BAdmin:random_list' %}" target="_self">{% csrf_token %}
+	<input name="action" type="hidden" value="modify" />
+    <table cellpadding="2" cellspacing="1" class="table">
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>随机码：</td>
+        <td class="input"><input name="met_randomnumber" type="text" class="text" value=""/></td>
+    </tr>
+
+    <tr>
+        <td class="text"></td>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="新增" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+
+  </table>
+</form>
+
+
+    <div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="1.html" title="网上办事">随机码</a></li>
+		<!--<li ><a href="1.html" title="系统邮箱配置">系统邮箱配置</a></li> -->
+	</ul>
+</div>
+<table cellpadding="1" cellspacing="0" border="1" class="table">
+    <tr> 
+        <th class=""><span class="bi_tian">*</span>序号</th>
+        <th class=""><span class="bi_tian">*</span>随机号码</th>
+        <th class=""><span class="bi_tian">*</span>创建时间</th>
+        <th class=""><span class="bi_tian">*</span>使用状态</th>
+        <th class=""><span class="bi_tian">*</span>操作</th>
+    </tr>
+     {% for random in randomlist %}
+    <tr style="text-align: center">
+        <td class=""><span class="">{{ random.id }}</span></td>
+        <td class=""><span class="">{{ random.number }}</span></td>
+        <td class=""><span class="">{{ random.addtime }}</span></td>
+        {% if random.state %}
+            <td class=""><span class="">启用</span></td>
+        {% else %}
+            <td class=""><span class="">禁用</span></td>
+        {% endif %}
+
+        <td class="">
+            <span class=""><a href="{% url 'BAdmin:random_change' random.id %}">改变状态</a></span>
+        &nbsp;&nbsp;<span class=""><a href="{% url 'BAdmin:random_delete' random.id %}">删除</a></span>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</body>
+</html>

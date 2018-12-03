@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'BAdmin/images/metinfo.css' %}" />
+<script type="text/javascript" src="{% static 'BAdmin/ckeditor/ckeditor.js' %}"></script>
+
+</head>
+
+<body>
+
+	<div class="metinfotop">
+	<div class="position">简体中文：预约取号 > <a href="#">业务配置</a></div>
+
+	</div>
+	<div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="预约取号">业务配置</a></li>
+		<!--<li ><a href="1.html" title="系统邮箱配置">系统邮箱配置</a></li> -->
+	</ul>
+</div>
+<table cellpadding="1" cellspacing="0" border="1" class="table">
+    <tr> 
+        <th class=""><span class="bi_tian">*</span>序号</th>
+        <th class=""><span class="bi_tian">*</span>名称</th>
+        <th class=""><span class="bi_tian">*</span>类型</th>
+        <th class=""><span class="bi_tian">*</span>窗口</th>
+        <th class=""><span class="bi_tian">*</span>是否支持网上取号</th>
+        <th class=""><span class="bi_tian">*</span>操作</th>
+    </tr>
+     {% for service in servicelist %}
+    <tr style="text-align: center">
+        <td class=""><span class="">{{ forloop.counter }}</span></td>
+        <td class=""><span class="">{{ service.name }}</span></td>
+        <td class=""><span class="">{{ service.type }}</span></td>
+        <td class=""><span class="">{{ service.window }}</span></td>
+        <td class=""><span class="">{{ service.state }}</span></td>
+        <td class="">
+            <span class="">
+{#                <a href="{% url 'BAdmin:service_editor' service.id %}">编辑&nbsp;&nbsp;</a>#}
+{#                <a href="#">发送模板信息</a>#}
+                <a href="{% url 'BAdmin:service_change' service.id %}">更改状态&nbsp;&nbsp;</a>
+                <a href="{% url 'BAdmin:service_delete' service.id %}">删除</a>
+            </span>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</body>
+</html>

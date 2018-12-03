@@ -1,0 +1,25 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block js %}
+{% endblock %}
+
+{% block title %}
+    我要留言
+{% endblock %}
+
+
+{% block content %}
+
+    <p data-theme="e">您已留言成功，请耐心等候回复。</p>
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:setmessage' %}" data-icon="minus">我要留言</a></li>
+            <li><a href="{% url 'Reception:showmessage' %}" data-icon="grid">查看留言</a></li>
+        </ul>
+    </div>
+{% endblock %}

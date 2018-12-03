@@ -1,0 +1,46 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    我要预约
+{% endblock %}
+
+{% block content %}
+    <form method="POST" action="{% url 'Reception:ticket_appoint' %}">{% csrf_token %}
+    <div data-role="fieldcontain">
+            <label class="select">选择预约业务:</label>
+        <select name="met_serviceid" data-native-menu="false">
+                {% for service in servicelist %}
+                    <option value="{{ service.id }}">{{ service.name }}</option>
+                {% endfor %}
+        </select>
+    </div>
+        <label  class="select">选择预约时间:</label>
+        <select name="met_day"  data-native-menu="false">
+            {% for date in datelist %}
+                <option value="{{ date.year }}-{{ date.month }}-{{ date.day }}">{{ date.year }}年{{ date.month }}月{{ date.day }}日</option>
+            {% endfor %}
+        </select>
+        <select name="met_hour"  data-native-menu="false">
+            <option value="9">9:00-10:00</option>
+            <option value="10">10:00-11:00</option>
+            <option value="11">11:00-12:00</option>
+            <option value="14">14:00-15:00</option>
+            <option value="15">15:00-16:00</option>
+            <option value="16">16:00-17:00</option>
+        </select>
+    </div>
+   <div class="ui-body ui-body-b">
+        <div class="ui-block-b" style="width: 100%;"><button  type="submit" data-theme="a">提交预约</button></div>
+    </div>
+    </form>
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:ticket_wait' %}" data-icon="grid">等候情况</a></li>
+        </ul>
+    </div>
+{% endblock %}

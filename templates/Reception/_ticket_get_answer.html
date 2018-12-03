@@ -1,0 +1,24 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1 style="text-align: center;">{{ title }}</h1>
+    <p>{{ answer|safe }}</p>
+{% endblock %}
+
+{% block footer %}
+  <div class="weui-tabbar">
+   <a href="{% url 'Reception:ticket_wait' %}" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="{% static 'Reception/images/icon_nav_cell.png' %}" alt="">
+      </div>
+      <p class="weui-tabbar__label">实时取号</p>
+    </a>
+    <a href="{% url 'Reception:myticket' %}" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="{% static 'Reception/images/icon_nav_article.png' %}" alt="">
+      </div>
+      <p class="weui-tabbar__label">我的取号</p>
+    </a>
+  </div>
+{% endblock %}

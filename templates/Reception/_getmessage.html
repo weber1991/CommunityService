@@ -1,0 +1,71 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block content %}
+    <h1 style="text-align: center;">留言详情</h1>
+<div class="weui-cells weui-cells_form">
+  <div class="weui-cell weui-cell">
+    <div class="weui-cell__hd"><label for="" class="weui-label" style="color: #a6a6a6">留言人 ：</label></div>
+    <div class="weui-cell__bd">
+      {{ message.sendname }}
+    </div>
+  </div>
+  <div class="weui-cell weui-cell">
+    <div class="weui-cell__hd"><label for="" class="weui-label" style="color: #a6a6a6">留言时间 ：</label></div>
+    <div class="weui-cell__bd">
+      {{ message.sendtime }}
+    </div>
+  </div>
+  <div class="weui-cell weui-cell">
+    <div class="weui-cell__hd"><label for="" class="weui-label" style="color: #a6a6a6">标题 ：</label></div>
+    <div class="weui-cell__bd">
+      {{ message.sendtitle }}
+    </div>
+  </div>
+    <div class="weui-cells__title">留言内容：</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+            {{ message.sendcontent|safe }}
+        </div>
+    </div>
+    </div>
+
+        <div class="weui-cells__title">附件：</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                {% if message.file0 %}
+                <a href="{{ message.file0 }}">图片</a>
+                {% endif %}
+                {% if message.file1 %}
+                <a href="{{ message.file1 }}">图片</a>
+                {% endif %}
+                {% if message.file2 %}
+                <a href="{{ message.file2 }}">图片</a>
+                {% endif %}
+        </div>
+    </div>
+    </div>
+      <div class="weui-cell weui-cell">
+    <div class="weui-cell__hd"><label for="" class="weui-label" style="color: #a6a6a6">回复人 ：</label></div>
+    <div class="weui-cell__bd">
+      {{ message.backname }}
+    </div>
+  </div>
+<div class="weui-cells__title">回复内容：</div>
+<div class="weui-cells">
+  <div class="weui-cell">
+    <div class="weui-cell__bd">
+      {{ message.backcontent|safe }}
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}
+

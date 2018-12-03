@@ -1,0 +1,70 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+{% block js %}
+    <script type="text/javascript">KindEditor.ready(function(K) {
+        K.create('textarea[name="met_content"]', {
+        width : "800px",
+        height : "500px",
+        uploadJson: '/admin/uploads/kindeditor',
+    });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+	<div class="metinfotop">
+	<div class="position">简体中文：社区动态 > <a href="#">添加咨询</a></div>
+
+	</div>
+	<div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="社区动态">添加咨询</a></li>
+	</ul>
+</div>
+<form method="POST" name="myform" action="{% url 'BAdmin:blog_add' %}" target="_self">{% csrf_token %}
+	<input name="action" type="hidden" value="modify" />
+    <table cellpadding="2" cellspacing="1" class="table">
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>标题：</td>
+        <td class="input"><input name="met_title" type="text" class="text" value=""/></td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>发布人：</td>
+        <td class="input">
+			<input name="met_author" type="text " class="text gen" value="" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>咨询概述：</td>
+        <td class="input">
+			<input name="met_desc" type="text " class="text gen" value="" />
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>咨询内容：</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<textarea name="met_content" rows="30" cols="50" ></textarea>
+			<span class="tips">记得保存!</span>
+        </td>
+    </tr>
+
+
+	<tr>
+        <td class="text"></td>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}

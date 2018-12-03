@@ -1,0 +1,29 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    取号验证
+{% endblock %}
+
+
+{% block content %}
+    <form action="{% url 'Reception:random_check' %}" method="POST">{% csrf_token %}
+    <div data-role="fieldcontain">
+		<label for="name">随机码:</label>
+        <input type="text" name="met_randomnumber" id="sendname" value=""  />
+	</div>
+        <div class="ui-body ui-body-b">
+               <div class="ui-block-b" style="width: 100%;"><button  type="submit" data-theme="a">验证</button></div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:ticket_wait' %}" data-icon="grid">等候情况</a></li>
+        </ul>
+    </div>
+{% endblock %}

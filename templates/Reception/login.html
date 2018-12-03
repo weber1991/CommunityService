@@ -1,0 +1,35 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    登陆系统
+{% endblock %}
+
+
+{% block content %}
+    <form action="{% url 'Reception:login' %}" method="POST">{% csrf_token %}
+    <div data-role="fieldcontain">
+		<label for="name">身份证:</label>
+        <input type="text" name="met_idcard" id="sendname" value=""  />
+	</div>
+    <div data-role="fieldcontain">
+		<label for="name">密码:</label>
+        <input type="password" name="met_password" id="sendphone" value=""  />
+	</div>
+        <div class="ui-body ui-body-b">
+               <div class="ui-block-b" style="width: 100%;"><button  type="submit" data-theme="a">登陆系统</button></div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:backpassword' %}" data-icon="grid">重置密码</a></li>
+            <li><a href="{% url 'Reception:login' %}" data-icon="minus">登陆</a></li>
+            <li><a href="{% url 'Reception:register' %}" data-icon="grid">注册</a></li>
+        </ul>
+    </div>
+{% endblock %}

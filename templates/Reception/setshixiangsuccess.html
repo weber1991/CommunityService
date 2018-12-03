@@ -1,0 +1,23 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block js %}
+{% endblock %}
+
+{% block title %}
+    我要留言
+{% endblock %}
+
+
+{% block content %}
+    <p data-theme="e">您已提交资料成功，请耐心工作人员审核和回复。</p>
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:myshixiang' %}" data-icon="grid">我的留言</a></li>
+        </ul>
+    </div>
+{% endblock %}

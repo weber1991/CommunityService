@@ -1,0 +1,36 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block js %}
+
+{% endblock %}
+
+{% block title %}
+    等候情况
+{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center;">{{ today }}取号情况</h2>
+
+    <ul data-role="listview" data-divider-theme="d" data-split-theme="d" data-inset="true" ><!---->
+        {% for wait in waitlist %}
+        <li data-role="list-divider" data-theme="b" style="font-size: large;">{{ wait.service.name }}</li>
+        <li>等候人数&nbsp;:&nbsp;<b>{{ wait.count|default_if_none:'无' }}</b></li>
+        <li>当前办理票号&nbsp;:&nbsp;<b>{{ wait.doing|default_if_none:'无' }}</b></li>
+        <li>下一个办理票号&nbsp;:&nbsp;<b>{{ wait.net|default_if_none:'无' }}</b></li>
+
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+{% block footer %}
+<div data-role="navbar" >
+    <ul>
+        <li><a href="{% url 'Reception:random_check' %}" data-icon="minus">我要取号</a></li>
+        <li><a href="{% url 'Reception:ticket_appoint' %}" data-icon="grid">我要预约</a></li>
+    </ul>
+</div>
+{% endblock %}

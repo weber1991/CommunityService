@@ -1,0 +1,10 @@
+{% extends 'Reception/_base.html' %}
+{% block content %}
+    <h1 style="text-align: center;">{{ communitydata.title }}</h1>
+    <p>{{ communitydata.content|safe }}</p>
+    <p>{{ communitydata.author }}</p>
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}

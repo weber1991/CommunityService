@@ -1,0 +1,18 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    联系我们
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center;">{{ contactdata.title }}</h1>
+    <p>{{ contactdata.content|safe }}</p>
+    <p>{{ contactdata.author }}</p>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'Reception/footer.html' %}
+{% endblock %}

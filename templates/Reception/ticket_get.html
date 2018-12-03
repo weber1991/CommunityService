@@ -1,0 +1,37 @@
+{% extends 'Reception/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    我要取号
+{% endblock %}
+
+{% block content %}
+    <div data-role="main" class="ui-content">
+    <div data-role="collapsibleset">
+        {% for service in servicelist %}
+      <div data-role="collapsible">
+        <h2>{{ service.name }}</h2>
+        <form method="POST" action="{% url 'Reception:ticket_get' %}">{% csrf_token %}
+            <div class="ui-field-contain">
+            <input name="met_serviceid" type="hidden" value="{{ service.id }}">
+            <h4>业务窗口 : {{ service.window }}</h4>
+            <h4>备注 : {{ service.note }}</h4>
+
+            <input type="submit" data-inline="true" value="取号">
+        </div>
+        </form>
+      </div>
+        {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block footer %}
+    <div data-role="navbar" >
+        <ul>
+            <li><a href="{% url 'Reception:ticket_wait' %}" data-icon="grid">等候情况</a></li>
+        </ul>
+    </div>
+{% endblock %}

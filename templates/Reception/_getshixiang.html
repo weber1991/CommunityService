@@ -1,0 +1,30 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block content %}
+
+        {% if shixiang.handle == '是' %}
+          <div class="weui-msg__opr-area">
+    <p class="weui-btn-area">
+      <a href="{% url 'Reception:setshixiang' shixiang.bh %}" class="weui-btn weui-btn_primary">我要办理</a>
+    </p>
+  </div>
+    {% endif %}
+        <div class="weui-msg">
+  <div class="weui-msg__text-area " style="text-align: left;">
+    <h2 class="weui-msg__title" style="color: limegreen;">{{ shixiang.name }}</h2>
+    <p class="weui-msg__desc" style="text-align: left;">{{ shixiang.content|safe }}</p>
+      <h2 class="weui-msg__title" style="color: limegreen;">所需“上传材料”</h2>
+        {% for file in switch_file_list %}
+            <p class="weui-msg__desc"><a href="{{ file.url }}">{{ forloop.counter }}、{{ file.name }}{% if file.url != '' %}（安卓版微信或电脑端下载）{% endif %}</a></p>
+        {% endfor %}
+{#        <h2 class="weui-msg__title">必要材料</h2>#}
+{#        {% for file in must_file_list %}#}
+{#            <p class="weui-msg__desc"><a href="{{ file.url }}">{{ file.name }}</a></p>#}
+{#        {% endfor %}#}
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'Reception/_foot.html' %}
+{% endblock %}

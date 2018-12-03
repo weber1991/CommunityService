@@ -1,0 +1,287 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+{% block js %}
+    <script type="text/javascript">KindEditor.ready(function(K) {
+        K.create('textarea[name="met_content"]', {
+        width : "800px",
+        height : "500px",
+        uploadJson: '/admin/uploads/kindeditor',
+    });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+	<div class="metinfotop">
+	<div class="position">简体中文：网上办事 > <a href="#">编辑事项</a></div>
+
+	</div>
+	<div class="clear"></div>
+
+
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="社区动态">编辑事项</a></li>
+		<!--<li ><a href="1.html" title="系统邮箱配置">系统邮箱配置</a></li> -->
+	</ul>
+</div>
+<form method="POST" enctype="multipart/form-data" name="myform" action="{% url 'BAdmin:shixiang_data' shixiang.bh %}" target="_self">{% csrf_token %}
+
+	<input name="action" type="hidden" value="modify" />
+<table cellpadding="2" cellspacing="1" class="table">
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>名称：</td>
+        <td class="input"><input name="met_name" type="text" class="text" value="{{ shixiang.name }}"/></td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>事项类型：</td>
+        <td >
+			<select name="met_type">
+                <option value="{{ shixiang.type.id }}">{{ shixiang.type }}</option>
+                {% for type in shixiangtypelist %}
+                  <option value="{{ type.id }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>事项内容：</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<textarea name="met_content" rows="30" cols="50" >{{ shixiang.content }}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件1：<input name="filename0" value="{{ shixiang.note0|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file0 != '' %}
+        <td class="input"><a href="{{ shixiang.file0 }}">{{ shixiang.note0 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file0" placeholder="" />
+            {% if shixiang.switch0 == 1 %}
+                <input name="switch0" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch0" type="checkbox" value="1" />是否公开
+            {% endif %}
+            {% if shixiang.must0 == 1 %}
+                <input name="must0" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must0" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件2：<input name="filename1" value="{{ shixiang.note1|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file1 != '' %}
+        <td class="input"><a href="{{ shixiang.file1 }}">{{ shixiang.note1 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file1" placeholder="" />
+            {% if shixiang.switch1 == 1 %}
+                <input name="switch1" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch1" type="checkbox" value="1" />是否公开
+            {% endif %}
+            {% if shixiang.must1 == 1 %}
+                <input name="must1" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must1" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件3：<input name="filename2" value="{{ shixiang.note2|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file2 != '' %}
+        <td class="input"><a href="{{ shixiang.file2 }}">{{ shixiang.note2 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file2" placeholder="" />
+            {% if shixiang.switch2 == 1 %}
+                <input name="switch2" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch2" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must2 == 1 %}
+                <input name="must2" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must2" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件4：<input name="filename3" value="{{ shixiang.note3|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file3 != '' %}
+        <td class="input"><a href="{{ shixiang.file3 }}">{{ shixiang.note3 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file3" placeholder="" />
+            {% if shixiang.switch3 == 1 %}
+                <input name="switch3" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch3" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must3 == 1 %}
+                <input name="must3" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must3" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件5：<input name="filename4" value="{{ shixiang.note4|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file4 != '' %}
+        <td class="input"><a href="{{ shixiang.file4 }}">{{ shixiang.note4 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file4" placeholder="" />
+                        {% if shixiang.switch4 == 1 %}
+                <input name="switch4" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch4" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must4 == 1 %}
+                <input name="must4" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must4" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件6：<input name="filename5" value="{{ shixiang.note5|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file5 != '' %}
+        <td class="input"><a href="{{ shixiang.file5 }}">{{ shixiang.note5 }}</a></td>
+        {% endif %}
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file5" placeholder="" />
+            {% if shixiang.switch5 == 1 %}
+                <input name="switch5" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch5" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must5 == 1 %}
+                <input name="must5" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must5" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件7：<input name="filename6" value="{{ shixiang.note6|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file6 != '' %}
+        <td class="input"><a href="{{ shixiang.file6 }}">{{ shixiang.note6 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file6" placeholder="" />
+            {% if shixiang.switch6 == 1 %}
+                <input name="switch6" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch6" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must6 == 1 %}
+                <input name="must6" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must6" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件8：<input name="filename7" value="{{ shixiang.note7|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file7 != '' %}
+        <td class="input"><a href="{{ shixiang.file7 }}">{{ shixiang.note7 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file7" placeholder="" />
+                        {% if shixiang.switch7 == 1 %}
+                <input name="switch7" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch7" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must7 == 1 %}
+                <input name="must7" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must7" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件9：<input name="filenam8" value="{{ shixiang.note8|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file8 != '' %}
+        <td class="input"><a href="{{ shixiang.file8 }}">{{ shixiang.note8 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file8" placeholder="" />
+                        {% if shixiang.switch8 == 1 %}
+                <input name="switch8" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch8" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must8 == 1 %}
+                <input name="must8" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must8" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+
+    <tr>
+        <td class="text"><span class="bi_tian">*</span>附件10：<input name="filename9" value="{{ shixiang.note9|default_if_none:"" }}" type="text"  style="font-size: 15px;"/></td>
+        {% if shixiang.file9 != '' %}
+        <td class="input"><a href="{{ shixiang.file9 }}">{{ shixiang.note9 }}</a></td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td colspan="2" class="text">
+			<input id="file" type="file"  name="file9" placeholder="" />
+                        {% if shixiang.switch9 == 1 %}
+                <input name="switch9" type="checkbox" value="1" checked="checked" />是否公开
+            {% else %}
+                <input name="switch9" type="checkbox" value="1" />是否公开
+            {% endif %}
+
+            {% if shixiang.must9 == 1 %}
+                <input name="must9" type="checkbox" value="1" checked="checked" />是否必须
+            {% else %}
+                <input name="must9" type="checkbox" value="1" />是否必须
+            {% endif %}
+        </td>
+    </tr>
+     <tr><td><span class="tips">记得保存!</span></td></tr>
+
+	<tr>
+        <td class="text"></td>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}

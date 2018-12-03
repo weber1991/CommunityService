@@ -1,0 +1,64 @@
+{% extends 'Reception/_base.html' %}
+{% load static %}
+{% block title %}
+    办理事项
+{% endblock %}
+
+{% block content %}
+    <form id="form_setshixiang" action="{% url 'Reception:mytoshixiang_assess' toshixiang.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for=""  class="weui-label">评价等级：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="met_rank">
+                        <option value="非常满意">非常满意</option>
+                        <option value="满意">满意</option>
+                        <option value="一般">一般</option>
+                        <option value="不满意">不满意</option>
+                    </select>
+                </div>
+    </div>
+
+    <div class="weui-cells__title">评价内容</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea  name="met_comment" class="weui-textarea" placeholder="输入评价内容" rows="3"></textarea>
+                </div>
+            </div>
+    </div>
+
+    <div class="weui-btn-area">
+      <a  style="margin-top:10%;" class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="tosubmit()">提交评价</a>
+    </div>
+</div>
+</form>
+
+
+{% endblock %}
+{% block js %}
+<script>
+        function tosubmit() {
+            {#var _content = artEditor.getContent();#}
+            {#var sendcontent = document.getElementById('met_sendcontent');#}
+            {#sendcontent.innerHTML = _content;#}
+            document.getElementById('form_setshixiang').submit();
+        }
+/*实例化一个编辑器*/
+{#var artEditor = new Eleditor({#}
+{#						el: '#article-body',#}
+{#						upload:{#}
+{#							server: '/Eleditor_uploads/Reception',#}
+{#							fileSizeLimit: 2,#}
+{#                            formName:'imgFile',#}
+{#						}#}
+{#					});#}
+</script>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
+

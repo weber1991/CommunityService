@@ -1,0 +1,106 @@
+{% extends 'BAdmin/base_editor.html' %}
+{% load static %}
+{% load BAdmin_filter %}
+{% block js %}
+
+{% endblock %}
+
+
+{% block body %}
+	<div class="metinfotop">
+	<div class="position">简体中文：用户权限配置 > <a href="#">用户权限配置</a></div>
+
+	</div>
+	<div class="clear"></div>
+<div class="stat_list">
+	<ul>
+		<li class="now"><a href="#" title="人员信息">用户权限配置</a></li>
+	</ul>
+</div>
+<form method="POST" name="myform" action="{% url 'BAdmin:user_set' user.id %}" target="_self">{% csrf_token %}
+	<input name="action" type="hidden" value="modify" />
+    <table cellpadding="1" class="table" style="text-align: left">
+        <tr >
+        <td class="text" style="text-align: left;"><span class="bi_tian">*</span>用户名：{{ user.name }}</td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>创建时间：{{ user.addtime }}</td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>新闻发布模块：
+        <select name="blog_power" >
+            <option value="{{ user.blog }}" selected="selected">{{ user.blog|User_power }}</option>
+            <option value="0">没有此权限</option>
+            <option value="1">办事员</option>
+            <option value="2">管理员</option>
+        </select>
+        </td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>留言模块：
+        <select name="message_power" >
+            <option value="{{ user.message }}" selected="selected">{{ user.message|User_power }}</option>
+            <option value="0">没有此权限</option>
+            <option value="1">办事员</option>
+            <option value="2">管理员</option>
+        </select>
+        </td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>网上办事模块：
+        <select name="webword_power" >
+            <option value="{{ user.webword }}" selected="selected">{{ user.webword|User_power }}</option>
+            <option value="0">没有此权限</option>
+            <option value="1">办事员</option>
+            <option value="2">管理员</option>
+        </select>
+        </td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>叫号模块：
+        <select name="ticket_power" >
+            <option value="{{ user.ticket }}" selected="selected">{{ user.ticket|User_power }}</option>
+            <option value="0">没有此权限</option>
+            <option value="1">办事员</option>
+            <option value="2">管理员</option>
+        </select>
+        </td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>人员权限模块：
+        <select name="person_power" >
+            <option value="{{ user.person }}" selected="selected">{{ user.person|User_power }}</option>
+            <option value="0">没有此权限</option>
+            <option value="1">办事员</option>
+            <option value="2">管理员</option>
+        </select>
+        </td>
+        </tr>
+
+        <tr>
+        <td class="text"><span class="bi_tian">*</span>是否为超级管理员：
+            {% if user.issuper == 1 %}
+        <input name="issuper" type="checkbox" value="1"  checked="checked"/>
+            {% else %}
+            <input name="issuper" type="checkbox" value="1"/>
+            {% endif %}
+        </td>
+        </tr>
+        <tr>
+        <td><span class="tips">记得点击保存!</span></td>
+        </tr>
+	<tr>
+	    <td class="submit">
+		<input type="submit" name="submit1" value="保存" class="submit" onclick="return Smit($(this),'myform')" />
+        </td>
+    </tr>
+    </table>
+</form>
+
+{% endblock %}
