@@ -27,7 +27,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Reception/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28500">
+            <state relative-caret-position="28250">
               <caret line="1140" column="32" selection-start-line="1140" selection-start-column="32" selection-end-line="1140" selection-end-column="32" />
             </state>
           </provider>
@@ -36,7 +36,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BAdmin/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23525">
+            <state relative-caret-position="23250">
               <caret line="941" column="17" selection-start-line="941" selection-start-column="17" selection-end-line="941" selection-end-column="17" />
             </state>
           </provider>
@@ -151,6 +151,9 @@
     <dirStrings>
       <dir>D:\CommunityServer\CommunityService\templates\Reception</dir>
     </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -426,11 +429,11 @@
       <window_info anchor="bottom" id="TODO" order="11" weight="0.32843137" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5030257" side_tool="true" weight="0.30228758" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="1" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="1" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.35474452" />
       <window_info anchor="bottom" id="Run" order="7" sideWeight="0.4969743" weight="0.3649635" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.329927" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2388664" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24291497" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="0" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -451,26 +454,26 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
-      <window_info id="Favorites" order="0" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2388664" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="11" weight="0.32843137" />
+      <window_info anchor="bottom" id="Version Control" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="7" sideWeight="0.4969743" weight="0.38248175" />
       <window_info anchor="bottom" id="manage.py@CommunityService" order="14" visible="true" weight="0.28613138" />
+      <window_info anchor="bottom" id="Python Console" order="2" weight="0.35474452" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.3270073" />
       <window_info anchor="bottom" id="manage.py@xxbSystem" order="4" visible="true" weight="0.32913387" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.329927" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5030257" side_tool="true" weight="0.30228758" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="1" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="right" id="SciView" order="4" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="right" id="Database" order="0" />
-      <window_info anchor="bottom" id="Python Console" order="2" weight="0.35474452" />
+      <window_info id="Favorites" order="0" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -748,7 +751,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Reception/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28500">
+        <state relative-caret-position="28250">
           <caret line="1140" column="32" selection-start-line="1140" selection-start-column="32" selection-end-line="1140" selection-end-column="32" />
         </state>
       </provider>
@@ -762,7 +765,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BAdmin/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23525">
+        <state relative-caret-position="23250">
           <caret line="941" column="17" selection-start-line="941" selection-start-column="17" selection-end-line="941" selection-end-column="17" />
         </state>
       </provider>
