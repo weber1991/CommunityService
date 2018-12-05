@@ -8,15 +8,16 @@
     <form id="form_mydata" action="{% url 'Reception:mydata' %}" method="POST">{% csrf_token %}
 <div class="weui-cells weui-cells_form">
   <div class="weui-cell">
-    <div class="weui-cell__hd"><label class="weui-label">账号名称</label></div>
+    <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
     <div class="weui-cell__bd">
 {#      <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入身份证号码">#}
-        <input name="met_name" class="weui-input" type="text" placeholder="{{ wechatuser.name }}">
+        <input name="met_name" readonly="readonly" class="weui-input" type="text" placeholder="{{ wechatuser.name }}">
+
     </div>
   </div>
-    <div class="weui-btn-area">
-      <a class="weui-btn weui-btn_primary" href="javascript:" id="login" onclick="tosubmit()">保存</a>
-    </div>
+{#    <div class="weui-btn-area">#}
+{#      <a class="weui-btn weui-btn_primary" href="javascript:" id="login" onclick="tosubmit()">保存</a>#}
+{#    </div>#}
 </div>
     </form>
 
