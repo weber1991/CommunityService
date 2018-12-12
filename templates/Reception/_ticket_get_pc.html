@@ -41,6 +41,7 @@
     {% endfor %}
 
 {% if printTicket.state == 1 %}
+{#    票号页面，隐藏，不公开#}
 <div id="PrintTicket" style="width: 100%;display: none;" >
     <div style="width:100%;font-size: 18px;margin-left: 13%;font-family: SimHei;"><b>长富社区公共服务中心</b></div>
 <div style="width: 45%;float: left;">
@@ -74,6 +75,7 @@
   <script src="{% static 'Reception/js/fastclick.js' %}"></script>
  <script src="{% static 'Reception/js/jquery.qrcode.min.js' %}"></script>
   <script>
+      // 调用二维码插件
       $('#qrcode').empty();
       jQuery('#qrcode').qrcode({
           render: "canvas",
@@ -81,6 +83,7 @@
           height:80,
           text:"{{ printTicket.url }}",
       });
+      // 配置技巧，指定使用canvas方式，同时构造进去
       var  canvas = $('#qrcode canvas');
       var img = canvas[0].toDataURL("image/png");
       $('#qrcode').html("<img src='"+img +"'>");
@@ -94,41 +97,50 @@
   <script src="{% static 'Reception/js/jquery-weui.js' %}"></script>
   <script>
       var LODOP; //声明为全局变量
-      {% if printTicket.state == 1 %}
 
+      {% if printTicket.state == 1 %} // 判断是否有票号需要打印
+
+// 如果有票号打印，则直接调用插件打印票号
 window.onload = function () {
-    disableticketbutton()
-    setTimeout("prn1_preview()",600);
+    disableticketbutton()       // 将按钮取消点击，防止连续点击
+    setTimeout("prn1_preview()",600);      // 打印票号，设置延迟时间，让插件有时间加载
     //setTimeout("prn1_print()",600);
-    setTimeout("ableticketbutton()", 4000)
+    setTimeout("ableticketbutton()", 4000)  // 恢复按钮点击功能
     //CreateOneFormPage();
 	//LODOP.PREVIEW();
     //LODOP.PRINT();
 }
       {% endif %}
 
+      // 取消按钮点击功能
       function disableticketbutton() {
          $(".ticketbutton").attr("onclick","document.getElementById('{{ service.id }}').onclick = null");
          $(".ticketbuttonp").css("background-color","Gray");
       }
+      // 恢复按钮点击功能
       function ableticketbutton() {
           $(".ticketbutton").attr("onclick","submittikcet(this)");
           $(".ticketbuttonp").css("background-color","#1AAD19");
       }
+      // 提交取票
       function submittikcet(obj) {
           var ticketid = $(obj).attr('name');
           document.getElementById(ticketid).submit();
       }
+
+      // 调用打印插件，初始化页面配置，预览打印页面，
 	function prn1_preview() {
 		CreateOneFormPage();
 		LODOP.PREVIEW();
 		//setTimeout(alert("取号成功。"),1000);
 	};
+      // 调用打印插件，初始化页面配置，直接打印
 	function prn1_print() {
 		CreateOneFormPage();
 		LODOP.PRINT();
 		//setTimeout(alert("取号成功。"),1000);
 	};
+	 // 配置页面参数
 		function CreateOneFormPage(){
 		LODOP=getLodop();
 		LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
