@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>取号系统</title>
+
+<meta name="renderer" content="webkit">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="format-detection" content="telephone=no">
+
+<link rel="stylesheet" href="{% static 'Reception/css/_ticket_show_tv_style.css' %}">
+<link rel="stylesheet" href="{% static 'Reception/js/_ticket_show_tv_layui.js' %}">
+<script src="{% static 'Reception/js/jquery-2.1.4.js' %}"></script>
+<script src="{% static 'Reception/js/_ticket_show_tv_layui.js' %}"></script>
+
+</head>
+
+<style type="text/css">
+
+body{cursor: none}
+
+</style>
+
+<body>
+
+<div class="hurry-box">
+    <div class="call-title" style="columns: #000000">{{ today }}取号情况</div>
+</div>
+
+<div id="callBox" class="call">
+
+<div class="call-left">
+
+<div class="call-title">正在办理</div>
+
+<div class="call-left-show">
+    {% for wait in waitlist %}
+        {% for do in wait.doing %}
+            <div class="nl"><span class="no">{{ do.no }}</span><span class="go">请到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+
+
+</div> 
+
+<div class="hurry-box">
+
+<div class="call-title" style="color:#c10d20">下一个票号列表</div>
+
+<div class="hurry-list">
+    {% for wait in waitlist %}
+        <div class="hl"><span class="no">{{ wait.net }}</span><span class="go">稍后到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
+    {% endfor %}
+</div> 
+
+</div> 
+
+</div>
+
+<div class="hurry"></div>
+
+
+<script type="text/javascript">
+    // 播音功能
+    {% if call_state %}
+        var ttsDiv = document.getElementById('bdtts_div_id');
+      var ttsAudio = document.getElementById('tts_autio_id');
+      var ttsText = '{{ ticket_call_start.no }}' + "请到"+ '{{ ticket_call_start.window.name }}' +"办理业务";
+
+
+        // 另一种模式
+      /*var ssrcc = 'http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=10&text='+ttsText;
+      document.getElementById('tts_source_id').src=ssrcc;*/
+
+      //
+      ttsDiv.removeChild(ttsAudio);
+      var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+      //var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text='+ttsText+'" type="audio/mpeg">';
+      var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?idx=1&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&vol=5&pit=5&per=0&tex='+ ttsText+ '" type="audio/mpeg">';
+      var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+      var au2 = '</audio>';
+      ttsDiv.innerHTML = au1 + sss + eee + au2;
+
+      ttsAudio = document.getElementById('tts_autio_id');
+      ttsAudio.play();
+      var time = 4;
+         tourl = "http://127.0.0.1:8000/Reception/ticket_show/?ticketno=" + {{ ticket_call_start.id }};
+        // tourl = "http://changfushequ.top/Reception/ticket_show/?ticketno=" + {{ ticket_call_start.id }};
+　　　　　function Redirect() {
+              //alert(ticketno_session);
+　　　　　　　　window.location = tourl;
+　　　　　};
+  timer = setTimeout('Redirect()', time * 1000); //跳转
+
+    {% else %}
+         var time = 4;
+         tourl = "http://127.0.0.1:8000/Reception/ticket_show/?ticketno=" + "-1";
+        // tourl = "http://changfushequ.top/Reception/ticket_show/?ticketno=" + "-1";
+　　　　　function Redirect() {
+              //alert(ticketno_session);
+　　　　　　　　window.location = tourl;
+　　　　　}
+  timer = setTimeout('Redirect()', time * 1000);
+    {% endif %}
+</script>
+
+
+</body>
+
+</html>
+

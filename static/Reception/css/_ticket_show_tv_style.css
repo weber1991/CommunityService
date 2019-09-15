@@ -1,0 +1,75 @@
+html, body{ margin: 0; padding: 0; font: 12px/1.5em Arial, '微软雅黑'; color: #333; background:#ffffff;width:100%; height:100%; }
+ul, li, ol, select, input, textarea, p, h1, h2, h3, h4, h5, h6, table, td, fieldset, legend,dl,dd{ margin: 0; padding: 0;background-position: top;}
+a{ color: #333; text-decoration: none; cursor: pointer;}
+a img{ border: 0;}
+ol, ul, li{ list-style: none outside none;}
+.lsn{ list-style: none outside none !important;}
+.clearDiv{ clear: both; height: 0; font-size: 0;line-height: 0; margin: 0 !important; padding: 0 !important;}
+.fl{ float: left; }
+.fr{ float: right;}
+a:focus{outline:none;-moz-outline:none;}
+em, cite {font-style:normal}
+.mar{ margin-top:15px;}
+i{font-style: normal}
+span.red,em.red,p.red,strong.red{color:#f00}
+span.grey,em.grey,p.grey{color:#999}
+span.green,em.green,p.green,a.green{color:#090}
+
+#container{width:768px;height:100%;margin:auto;display: box;display: -moz-box;     display: -webkit-box; }
+.logo{width: 700px; margin:0px auto; text-align: center; padding: 40px 0}
+.logo img{width: 100%;}
+.business{width:100%; display: flex; flex-flow: row wrap; justify-content: space-around; margin: 0 auto; box-sizing: border-box; overflow: hidden;}
+.business .item{width: 30%; height: 140px; margin: 15px 0; background: #3f72c1; color:#fff; border:#2c5ba5 solid 1px; border-radius:5px; font-size: 28px; display: flex; align-items: center; justify-content: center; padding:0 20px; box-sizing: border-box;}
+.business .item p{width: 100%; height: 100%; display: flex; cursor: pointer; align-items: center; text-align: center; justify-content: center; flex-flow: column; line-height: 40px}
+.business .item p em{width: 100%; display: block; font-size: 22px; color: #ddab38}
+.business .item .son{display: none;}
+ul.son li{width: 240px; height: 60px; line-height: 60px; text-align: center; margin: 10px; background: #fff; font-size: 16px; float: left;}
+
+#bs{display: none}
+.business .bsc{width: 100%; display: flex; flex-flow: row wrap; justify-content: space-around; margin:0 auto; height: auto; padding-top:200px}
+.business .back{width: 100%; text-align: center; margin-top: 200px}
+.business .back button{width: 300px; border:#f20 solid 1px; background: #f60; color:#fff; text-align: center; height: 100px; line-height: 100px; font-size: 40px}
+.subtime{width:80px; height: 80px; border-radius: 50%; background: rgba(0,0,0,.6); display: flex; justify-content: center; align-items: center; font-size: 50px; position: fixed; top: 50px; right:20px; color:#fff;}
+
+.call{width: 100%; height: 100%; background: #3f72c1; padding: 15px; box-sizing: border-box; position: relative;}
+.call .call-left{width:100%; height: 100%; box-sizing: border-box; background: #fff; overflow: hidden; position: relative; }
+.call .call-title{width: 100%; height: 70px; line-height: 70px; text-align: center; font-size: 50px; border-bottom: #ddd solid 1px; background: #f5f5f5; font-weight: 600; letter-spacing: 6px; color: #3f72c1}
+.call-left-show{width: 100%; padding:10px 1%; box-sizing: border-box;display: flex; justify-content: space-between; flex-flow: row wrap;}
+.call-left-show ul{width: 100%;display: flex; justify-content: space-between; flex-flow: row wrap;}
+.call-left-show ul li{width:49%; height: 65px; line-height: 65px; background: #3f72c1; font-size: 54px; margin:5px 0; letter-spacing: 5px; text-align: center; border:#3f72c1 solid 3px; color:#fff; }
+.call-left-show ul li strong{margin:0 40px; color: #e1d267; width: 260px; display: inline-block; text-align: left}
+.call-left-show ul li strong.red{color:#e1d267; width: 140px; text-align: center;}
+
+.call-left-show .nl{width:49.5%; height: 95px; line-height: 95px; background: #3f72c1; font-size: 80px; margin:5px 0; letter-spacing: 5px; text-align: center; color:#fff; display: flex; justify-content: space-around;}
+.call-left-show .nl span{display: inline-block; color: #fff; font-weight: bold}
+.call-left-show .nl span.no{width: 300px;color: #e1d267}
+.call-left-show .nl span.go{width: 200px;}
+.call-left-show .nl span.num{width: 200px; color: #e1d267}
+
+.call .hurry-box{width: 100%; height: 345px; position: absolute; left: 0; bottom: 0; background: #e1d267; z-index: 10; border-top:#3f72c1 solid 15px; padding: 15px; box-sizing: border-box;}
+.hurry-list{width: 100%; padding: 10px 1%; box-sizing: border-box; background: #fff; height: 235px; display: flex; justify-content: space-between; flex-flow: row wrap;}
+.hurry-list .hl{width:49.5%; height: 95px; line-height: 95px; background: #e1d267; font-size: 80px; margin:5px 0; letter-spacing: 5px; text-align: center; color:#fff; display: flex; justify-content: space-around;}
+.hurry-list .hl span{display: inline-block; color: #c10d20; font-weight: bold;}
+.hurry-list .hl span.no{width: 300px;}
+.hurry-list .hl span.go{width: 260px;}
+.hurry-list .hl span.num{width: 200px;}
+
+.wait{width: 100%; height: 100%; text-align: center; line-height: 100%; font-size: 40px; color:#f00;padding-top: 40%}
+
+.hurry{width:56%; height: 100px; line-height: 100px; background: rgba(221,171,56,.8); font-size: 58px; text-align: center; border-radius: 10px; position: absolute; left: 22%; top: 40%; letter-spacing: 8px; color: #000; display: none;}
+.hurry strong{color:#3f72c1; margin:0 5px;}
+.hurry strong.red{color:#f00;}
+
+.qrcode{width:100%; text-align: center;}
+.qrcode p{width: 100%; line-height: 28px; font-size: 18px; color: #f00; text-align: center;}
+
+/*刷身份证相关*/
+.mark{width: 100%; height: 100%; background: rgba(0,0,0,.2); position: fixed; left: 0; top: 0;}
+#idcard-tip{width:614px; height: 560px; background: #fff; border:#555 solid 3px; border-radius: 10px; display: flex; align-items: center; position: absolute; font-size: 36px; padding:10px 20px 20px 20px; line-height: 60px;  flex-flow: column; justify-content: center;}
+#idcard-tip strong{color:#f00; margin-left:10px; font-size:46px}
+#idcard-tip button{width: 300px; border:#f20 solid 1px; background: #f60; color:#fff; text-align: center; height: 80px; line-height: 80px; font-size: 40px}
+
+#idcard-tip-sucess{width:600px; height: 140px; background: #fff; border:#555 solid 3px; border-radius: 10px; display: flex; align-items: center; position: absolute; font-size: 36px; padding: 10px 0 10px 0 ; line-height: 60px;  flex-flow: column; justify-content: center;}
+
+.sj-box{width: 100%; padding: 20px 0 20px 20px; box-sizing: border-box; height: 160px;}
+.sj-box .sj-name{width: 30.5%; height: 120px; line-height: 120px; text-align: center; background: #f60; color:#fff; font-size: 30px; border-radius: 5px; float: left;}

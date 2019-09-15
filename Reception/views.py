@@ -614,7 +614,7 @@ def ticket_show(req):
             ticket_call_start = None
             call_state = False
 
-    return render(req, 'Reception/_ticket_show.html', {'waitlist':waitlist, 'today':today,
+    return render(req, 'Reception/_ticket_show_tv.html', {'waitlist':waitlist, 'today':today,
                                                        'ticket_call_start':ticket_call_start,
                                                        'call_state':call_state})
 
