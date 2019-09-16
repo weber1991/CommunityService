@@ -49,8 +49,9 @@ body{cursor: none}
 <div class="call-left-show">
     {% for wait in waitlist %}
         {% for do in wait.doing %}
-            <div class="nl"><span class="no">{{ do.no }}</span><span class="go">请到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
+            <div class="nl"><span class="no">{{ do.no }} </span>
         {% endfor %}
+        <span class="go">请到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
     {% endfor %}
 </div>
 
@@ -64,7 +65,10 @@ body{cursor: none}
 
 <div class="hurry-list">
     {% for wait in waitlist %}
-        <div class="hl"><span class="no">{{ wait.net }}</span><span class="go">稍后到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
+        {% if wait.net is None %}     
+        {% elseif %}
+        <div class="hl"><span class="no">{{ wait.net }}</span></div>
+        {% endif %}
     {% endfor %}
 </div> 
 
