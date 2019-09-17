@@ -44,11 +44,13 @@ body{cursor: none}
 
 <div class="call-left-show">
     {% for wait in waitlist %}
+    {% if wait.doing %}
     <div class="nl"><span class="no"></span>
         {% for do in wait.doing %}
-            {{ do.no }} 
+            {{ do.no }}
         {% endfor %}
-    </span><span class="go">请到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
+    <span class="go">请到</span><span class="num">{{ wait.window.name }}</span></div>
+    {% endif %}
     {% endfor %}
 </div>
 
