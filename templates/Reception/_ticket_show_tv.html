@@ -36,22 +36,19 @@ body{cursor: none}
 
 <body>
 
-<div class="hurry-box">
-    <div class="call-title" style="columns: #000000">{{ today }}取号情况</div>
-</div>
-
 <div id="callBox" class="call">
 
 <div class="call-left">
 
-<div class="call-title">正在办理</div>
+<div class="call-title">（{{ today }}）正在办理</div>
 
 <div class="call-left-show">
     {% for wait in waitlist %}
+    <div class="nl"><span class="no"></span>
         {% for do in wait.doing %}
-            <div class="nl"><span class="no">{{ do.no }} </span>
+            {{ do.no }} 
         {% endfor %}
-        <span class="go">请到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
+    </span><span class="go">请到</span><span class="num">{{ wait.window.name }}</span><span class="c"></span></div>
     {% endfor %}
 </div>
 
@@ -66,7 +63,7 @@ body{cursor: none}
 <div class="hurry-list">
     {% for wait in waitlist %}
         {% if wait.net is None %}     
-        {% elseif %}
+        {% else %}
         <div class="hl"><span class="no">{{ wait.net }}</span></div>
         {% endif %}
     {% endfor %}
